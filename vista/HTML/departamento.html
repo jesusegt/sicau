@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>SICAU-SG</title>
+	<link rel='stylesheet' type='text/css' href='../CSS/trabajadores.css'>
+	<script type='text/javascript' src='../JS/formulario.js'></script>
+</head>
+<body>
+
+
+		<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Departamentos
+			</h1>
+			<a href='add-dep.html' class='btn btn-add-new'>
+				<i></i>
+				<span>Añadir nueva</span>
+				
+			</a>
+			
+		</div>
+		<div class='contenedor'>
+			<div class='panel panel-bordered'>
+				<div class='panel-body'>
+					<div class='busqueda'>
+						<input type='text' name='buscar' placeholder='Buscar' class='inputbusqueda'>
+						<span class='btn_buscar'>
+							<input type='button' name='buscar' value='Buscar' class='btn btn-buscar'>
+								<i class=''></i>
+							</button>
+						</span>
+					</div>
+					<div class='tabla'>
+						<table class='table table-hover'>
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Nombre</th>
+									<th class='actions text-right'>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>DP-01</td>
+									<td>Administración</td>
+									<td>
+										<span class='btn btn-delete pull-right'>Eliminar</span>
+										<a href='infodep.html' class='btn btn-warning pull-right'>
+											Ver
+										</a>
+										
+									</td>
+								</tr>
+								<tr>
+									<td>DP-02</td>
+									<td>Informática</td>
+									<td>
+										<span class='btn btn-delete pull-right'>Eliminar</span>
+										<a href='#' class='btn btn-warning pull-right'>
+											Ver
+										</a>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+					<div class='pull-left'>
+						<div class='show-res'>
+							Mostrando todas las entradas
+						</div>
+					</div>
+					<div class='pull-right'>
+							<ul class='pagination'>
+								<li class='page-item disabled'>
+									<span><</span>
+								</li>
+								<li class='page-item active'>
+									<span>1</span>
+								</li>
+								<li class='page-item disabled'>
+									<span>></span>
+								</li>
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+</body>
+</html>

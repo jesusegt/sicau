@@ -1,0 +1,143 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #EFF1F2;
+}
+
+
+header {
+	width: 100%;
+	font-family: georgia;
+	background: #3495DF;
+}
+
+	header a, header span{
+		color:white;
+		text-decoration: none;
+	}
+
+		.contenido {
+			width: 90%;
+			max-width: 900px;
+			margin:auto;
+		}
+
+		.logo-nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+	header nav .menu{
+		list-style: none;
+	}
+
+		header nav .menu li{
+			display: inline-block;
+			position: relative;
+		}
+
+		header nav .menu li a:hover{
+			background: #3FA2ED;
+			color: white;
+		}
+
+		header nav .menu li a{
+			color: #A0C9E7;
+			display: block;
+			text-decoration: none;
+			padding: 20px;
+
+		}
+
+
+		header nav .menu li:hover > .submenu {
+			display:block;
+		}
+		 
+		header nav .menu li .submenu {
+			display: none;
+			border: 1px solid #1391D2;
+			background:#FFF;
+			position: absolute;
+			width: 150%;
+		}
+
+		header nav .menu li .submenu li{
+			display: block;
+			border-bottom: 1px solid rgba(255,255,255,.5);
+			position: relative;
+		}
+
+		header nav .menu li .submenu li a {
+			display: block;
+			color: #646464;
+		}
+
+		header nav .menu li .submenu li a:hover{
+			color: #2c97df;
+			background: white;
+		}
+
+
+		header nav .menu li .submenu li .submenu{
+		right: -151.5%;
+		top: -1px;
+		position: absolute;
+		width: 150%;
+		}
+
+
+	header nav .menu-usuario{
+		list-style: none;
+	}
+
+		header nav .menu-usuario li{
+			display: inline-block;
+			position: relative;
+		}
+
+		header nav .menu-usuario span:hover{
+			background: #3FA2ED;
+			cursor: pointer;
+		}
+
+		header nav .menu-usuario li a, header nav .menu-usuario span{
+			display: block;
+			text-decoration: none;
+			padding: 20px;
+		}
+
+		/*header nav .menu-usuario li:hover .submenu-usuario {
+			display:block;
+		}*/
+
+
+
+		header nav .menu-usuario li .submenu-usuario {
+			display: none;
+			border: 1px solid #EBEBEB;
+			background:#FCFCFC;
+			position: absolute;
+			width: 150%;
+			border-radius: 5px;
+		}
+
+		header nav .menu-usuario li .submenu-usuario li{
+			display: block;
+			overflow: hidden;
+			border-bottom: 1px solid rgba(255,255,255,.5)
+		}
+
+		header nav .menu-usuario li .submenu-usuario li a {
+			display: block;
+			color: #B4B4B4;
+		}
+
+		header nav .menu-usuario li .submenu-usuario li a:hover{
+			color: #2c97df;
+			background: white;
+		}

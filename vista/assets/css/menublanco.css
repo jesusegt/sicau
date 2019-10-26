@@ -1,0 +1,38 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #f6f9fa;
+}
+
+
+header {
+	font-family: georgia;
+	width: 100%;
+	background: #FFFFFF;
+	border-bottom: 1px solid #E3E7EA;
+}
+
+	header label{
+		color: #495062;
+		padding: 20px;
+	}
+
+		.contenido {
+			width: 90%;
+			max-width: 900px;
+			margin:auto;
+		}
+
+		.logo-nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.uptyab{
+			padding: 0;
+			border-radius: 30px;
+		}

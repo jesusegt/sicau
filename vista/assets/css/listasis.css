@@ -1,0 +1,31 @@
+*{
+	font-family: arial;
+}
+
+.tabla{
+	background: #FFFFFF;
+	border: 1px solid #efefef;
+	margin: 10% auto;
+	border-radius: 2px;
+	padding: 20px 20px;
+}
+
+.tabla2{
+	padding: 0;
+}
+
+.select{
+	border: 1px solid #efefef;
+	border-radius: 2px;
+	width: 120px;
+	height: 24px;
+	font-size: 14px;
+}
+
+#hoy{
+	display: none;
+}
+
+#semanal{
+	display: block;
+}

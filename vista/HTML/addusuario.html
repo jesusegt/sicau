@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>SICAU-SG</title>
+		<link rel='stylesheet' type='text/css' href='../CSS/trabajadores.css'>
+		<script type='text/javascript' src='../JS/validaciones.js'></script>
+	</head>
+	<body>
+
+		<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Añadir Usuario
+			</h1>
+			<a href='usuarios.html' class='btn btn-warning'>
+				<i></i>
+				<span>Volver a la lista</span>
+			</a>
+			
+		</div>
+
+		<div class='contenedor'>
+			<div class='panel panel-bordered'>
+				<form name='formulario' class='formulario' onsubmit='return validarusuario(this)' method='post' action='usuarios.html'>
+					<div class='panel-body'>
+						<div class='form-group'>
+							<label for='nombre'>Nombre</label>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)'
+							id='miInput'>
+						</div>
+						<div class='form-group'>
+							<label for='apellido'>Apellido</label>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)'
+							id='miInput'>
+						</div>
+						<div class='form-group'>
+							<label for='tipo'>Tipo</label>
+							<input type='text' class='form-control' name='tipo' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)'
+							id='miInput'>
+						</div>
+
+						<div class='form-group'>
+							<label for='usuario'>Usuario</label>
+							<input type='text' class='form-control' name='usuario' placeholder='...' value='' autocomplete='off' id='miInput'>
+						</div>
+						<div class='form-group'>
+							<label for='contraseña'>Contraseña</label>
+							<input type='password' class='form-control' name='contraseña' placeholder='...' value='' autocomplete='off' id='miInput'>
+						</div>
+					</div>
+
+					<div class='panel-footer'>
+						<input type='submit' class='btn btn-primary save' name='guardar' value='Guardar'>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		
+
+
+	</body>
+</html>

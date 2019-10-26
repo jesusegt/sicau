@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>SICAU-SG</title>
+		<link rel='stylesheet' type='text/css' href='../CSS/trabajadores.css'>
+		<script type='text/javascript' src='../JS/validaciones.js'></script>
+	</head>
+	<body>
+
+		<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Editar Cargo
+			</h1>
+			<a href='cargo.html' class='btn btn-warning'>
+				<i></i>
+				<span>Volver a la lista</span>
+			</a>		
+		</div>
+
+		<div class='contenedor'>
+			<div class='panel panel-bordered'>
+				<form name='formulario' class='formulario' onsubmit='return validarcargo(this)' method='post' action='infocargo.html'>
+					<div class='panel-body'>
+						<div class='form-group'>
+							<label for='id'>Id</label>
+							<input type='text' class='form-control' name='id' placeholder='...' value='01' autocomplete='off' maxlength='10'>
+						</div>
+						<div class='form-group'>
+							<label for='nombre'>Nombre</label>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='Obrero' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput'>
+						</div>
+
+						<div class='form-group'>
+							<label for='id'>Id</label>
+							<input type='text' class='form-control' name='id' placeholder='...' value='02' autocomplete='off' maxlength='10'>
+						</div>
+						<div class='form-group'>
+							<label for='nombre'>Nombre</label>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='Secretaria' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput'>
+						</div>
+						
+						<div class='form-group'>
+							<label for='id'>Id</label>
+							<input type='text' class='form-control' name='id' placeholder='...' value='03' autocomplete='off' maxlength='10'>
+						</div>
+						<div class='form-group'>
+							<label for='nombre'>Nombre</label>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='Estudiante' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput'>
+						</div>
+					</div>
+
+					<div class='panel-footer'>
+						<a href='infocargo.html'>
+							<input type='button' class='btn btn-primary' name='guardar' value='Cancelar'>
+						</a>
+						<input type='submit' class='btn btn-primary' name='guardar' value='Guardar'>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		
+
+
+	</body>
+</html>

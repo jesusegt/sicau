@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>SICAU-SG</title>
+		<link rel='stylesheet' type='text/css' href='../assets/css/newsolicitudes.css'>
+		<script type='text/javascript' src='../JS/validaciones.js'></script>
+	</head>
+	<body>
+
+		<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Solicitud Prestación de Servicios
+			</h1>
+			
+		</div>
+
+		<div class='contenedor'>
+			<div class='panel panel-bordered'>
+
+				<form name='formulario' class='formulario' onsubmit='return validarsolicitud(this)' method='post' action=''>
+
+
+					<div class='panel-body'>
+						<div class='form-group'>
+							<label for='motivo'>Motivo</label>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'>
+						</div>
+						<div class='form-group'>
+							<label for='tipo'>Tipo</label>
+							<select class='form-control form-controlselect' id='tipo' required>
+								<option value='0'>Ninguno</option>
+								<?php  
+									@$_SESSION['selectarea'];
+									@$datosa = $_SESSION['selectarea'];//arreglo que trae los datos de la tabla
+									foreach(@$datosa as $a){
+								?>
+									<option value='<?php echo $a->id; ?>'><?php echo $a->nombre; ?></option>
+								<?php 
+									}
+
+							 	?>
+							</select>
+						</div>
+
+						<div class='form-group'>
+							<label for='lugar'>Lugar</label>
+
+							<input type='text' class='form-control' name='lugar' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)'>
+
+							<!--
+							<select class='form-control form-controlselecta' id='lugar' onchange='cargarlugar2(this.value);'>
+								<option value='0'>...</option>
+								<option value='1'>Aula</option>
+								<option value='2'>Areas verdes</option>
+								<option value='3'>Departamento</option>
+							</select>
+							<select class='form-control form-controlselecta2' id='lugar2' onchange='cargarlugar3(this.value);'>
+								<option value='0'>...</option>
+							</select>
+							<select class='form-control form-controlselecta2' id='lugar3'>
+								<option value='0'>...</option>
+							</select>
+							<select class='form-control form-controlselecta3' id='lugar4'>
+								<option value='0'>...</option>
+							</select>
+							-->
+						</div>
+						<div class='form-group'>
+							<label for='comentario'>Comentario</label>
+							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4'></textarea>
+							<!--
+							<input type='text' class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput'>
+							-->
+						</div>
+					</div>
+
+
+
+					<div class='panel-footer'>
+						<input type='reset' class='btn btn-delete' name='limpiar' value='Limpiar'>
+						<input type='submit' class='btn btn-primary save' name='guardar' value='Guardar'>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		
+
+
+	</body>
+</html>

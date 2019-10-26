@@ -1,0 +1,137 @@
+.tabla{
+	background: #FFFFFF;
+	border: 1px solid #efefef;
+	margin: 10% auto;
+	border-radius: 2px;
+}
+	.tindex{padding: 20px 40px 40px 40px;}
+	.tregasis, .tlogin, .tsolicitudes{padding: 10px 15px;}
+
+
+.tipotext{
+	border: 1px solid #efefef;
+	border-radius: 2px;
+	width: 214px;
+	height: 24px;
+	font-size: 14px;
+	line-height: 24px;
+	padding: 4px 10px;
+	margin-bottom: 14px;
+}
+
+.titulos{
+	font-family: arial;
+}
+
+
+.h2index, .h2login, .h2regasis, .h2soli{
+	color: #a1a1a1;
+	padding: 10px 0 5px;
+	line-height: 20px;
+	font-size: 24px;
+	font-weight: 300;
+}
+
+	.h2index{
+		margin: 0 20px 20px;
+	}
+
+	.h2login{
+		margin: 0 20px 10px;
+		width: 234px;
+	}
+
+	.h2regasis{
+		margin: 0 0 10px;
+		width: 250px;
+	}
+
+	.h2soli{
+		margin: 0 20px 10px;
+		width: 250px;
+	}
+
+
+.selectp, .selectp2, .selectp3{
+	border: 1px solid #efefef;
+	border-radius: 2px;
+	width: 120px;
+	height: 24px;
+	font-size: 14px;
+}
+
+	.selectp2{
+		width: 40px;
+	}
+
+	.selectp3{
+		width: 120px;
+	}
+
+
+.textarea{
+	border: 1px solid #efefef;
+	border-radius: 2px;
+	font-size: 14px;
+	width: 230px;
+}
+
+/*BOTONES*/
+	.btn{
+		width: 234px;
+		height: 32px;
+		border: 0;
+		border-radius: 3px;
+		font-size: 17px;
+		color: #fff;
+		background: #22A7F0;
+		cursor: pointer;
+		padding: 0;
+		margin-bottom: 3px;
+	}
+
+		.btn:hover{
+			background: #15a3ef;
+		}
+
+	.btn_atras{
+		margin-bottom: 10px;
+		background: #42D07E;
+	}
+
+		.btn_atras:hover{
+			background: #2ECC71;
+		}
+
+	.btn_asis{
+		margin-top: 7px;
+	}
+
+	.btn_soli{
+		width: 117px;
+		margin: 0 5px 10px 5px;
+	}
+
+	.btn_reset{
+	background: #ef6e6e;
+	}
+
+		.btn_reset:hover{
+			background: #f02626;
+		}
+
+/*OTROS*/
+	#lugar2{
+		display: none;
+	}
+	#lugar3{
+		display: none;
+	}
+	#lugar4{
+		display: none;
+	}
+
+	h4{
+		padding: 0;
+		margin: 0;
+	}
