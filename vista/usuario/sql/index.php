@@ -13,7 +13,10 @@ session_start();
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
-		<script type="text/javascript" src="../../assets/js/usuario.js"></script>
+		<link rel='stylesheet' type='text/css' href='../../assets/css/all.min.css'>
+
+		
+		
 	</head>
 	<body>
 
@@ -58,12 +61,14 @@ session_start();
 							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='' autocomplete='off' id='miInput'>
 						</div>
 						<div class='form-group'>
-							<label for='contrasena'>Contraseña</label>
-							<input type='text' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off' onkeypress='return soloNumeros(event)' onblur='limpia()' id='miInput' maxlength='12'>
+							<label for='contrasena'>Contraseña</label> 
+							<i class='far fa-eye-slash ojo' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='contrasena' id='contrasena' placeholder='...' autocomplete='off' maxlength='30' value=''>
 						</div>
 						<div class='form-group'>
-							<label for='pw'>Confirmar Contraseña</label>
-							<input type='text' class='form-control' name='pw' placeholder='...' value='' autocomplete='off'  onblur='limpia()' id='miInput' maxlength='75'>
+							<label for='pw'>Confirmar Contraseña</label> 
+							<i class='far fa-eye-slash ojo2' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='pw' id='pw' placeholder='...' autocomplete='off' maxlength='30' value=''>
 						</div>
 					</div>
 
@@ -71,6 +76,12 @@ session_start();
 						<input type='submit' class='btn btn-primary save' name='guardar' value='Guardar'>
 					</div>
 				</form>
+<script type='text/javascript' src='../../assets/js/jquery.min.js'></script>
+<script type='text/javascript' src='../../assets/js/usuario.js'></script>
+<script type='text/javascript' src='../../assets/js/all.js'></script>
+
+
+
 <?php 
 	}
 	if($sql=="b"){//si se trata de una consulta 
@@ -583,9 +594,9 @@ foreach($datoso as $o){
 		<div class='contenedor'>
 			<h1 class='page-title'>
 				<i></i>
-				Permiso <span style='color:red;'>INACTIVOS</span>
+				Usuario <span style='color:red;'>INACTIVOS</span>
 			</h1>
-			<a href='../../../controlador/ctr_permiso.php?list=1' class='btn btn-warning'>
+			<a href='../../../controlador/ctr_usuario.php?list=1' class='btn btn-warning'>
 				<i></i>
 				<span>Volver</span>
 				

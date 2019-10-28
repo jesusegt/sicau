@@ -253,11 +253,16 @@
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 			echo "<script>alert('No se pudo actualizar los datos')</script>";//Mensaje de Registro no válida
-			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/usuario/'>"; // ir a la pantalla de inicio
+			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/usuario/'>";// ir a la pantalla de inicio
+			//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/usuario/'>";// ir a la pantalla de inicio
+
 		}else //Si el areglo NO retornó vacío
-		{			
+		{	
+			$cambio="a";
+			$_SESSION['cambio']= $cambio;
 			echo "<script>alert('Datos actualizados con exito')</script>";//Mensaje de Registro válida
-			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_usuario.php?sql=v&ci=$cedula'>"; // ir a la pantalla de inicio
+			//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_usuario.php?sql=v&ci=$cedula'>"; // ir a la pantalla de inicio
+			echo "<script>window.parent.location.href= '../vista/index.php';</script>"; // ir a la pantalla de inicio
 		}	
 	}
 

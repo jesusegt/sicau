@@ -50,9 +50,7 @@
 		$solicitud->setId_tipo($_POST['id_tipo']);
 		$solicitud->setId_Subarea($_POST['id_subarea']);
 		$solicitud->setComentario($_POST['comentario']);
-		$solicitud->setId_solicitud($_POST['id_solicitud']);
-		
 
-		$datos = $solicitud->RegistrarSolicitud($_POST['fecha'],$_POST['cedula'],$_POST['motivo'],$_POST['id_tipo'],$_POST['id_subarea'],$_POST['comentario'],$_POST['id_solicitud']); //Invocamos al método de iniciar
+		$datos = $solicitud->RegistrarSolicitud($_POST['fecha'],$_POST['cedula'],$_POST['motivo'],$_POST['id_tipo'],$_POST['id_subarea'],$_POST['comentario']); //Invocamos al método de iniciar
 	}
 ?>

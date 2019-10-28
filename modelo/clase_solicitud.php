@@ -63,14 +63,14 @@
 					return $this->comentario;
 				}
 		// Nombre
-			//setters
+			/*/setters
 				public function setId_solicitud($id_solicitud){
 					$this->id_solicitud = $id_solicitud;
 				}
 			//getters
 				public function getId_solicitud(){
 					return $this->id_solicitud;
-				}
+				}*/
 
 
 
@@ -99,7 +99,7 @@
 
 
 		/* REGISTRAR */
-			public function RegistrarSolicitud($fecha,$cedula,$motivo,$id_tipo,$id_subarea,$comentario,$id_solicitud){
+			public function RegistrarSolicitud($fecha,$cedula,$motivo,$id_tipo,$id_subarea,$comentario){
 				require_once("conexionpdo.php"); //se llama al archivo para la conexion
 
 				$sql = "SELECT * FROM solicitante WHERE cedula='$this->cedula'";//sentencia sql para consultar
@@ -112,21 +112,25 @@
 					@$idsol=$u['id'];
 					@$estatus=$u['estatus'];
 					@$cedu=$u['cedula'];
-
 					
 				}
 				if(empty($data)){ //Si el método, retorna un arreglo vacío;
 					echo "<script>alert('Solicitante no existente, verifique la cédula del solicitante o solicite al administrador del sistema que lo registre.')</script>";//Mensaje de Registro no válida
 					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/solicitud/sql/'>"; // ir a la pantalla de inicio
 				}else{ //Si el areglo NO retornó vacío	
+
+					$sql = "SELECT MAX(id) FROM solicitud";
+					$result = $con->prepare($sql);//preparar la sentencia sql
+					$result->execute(); //ejecuta la sentencia sql
+					$data = $result->fetchAll();
+					foreach($data as $u){//se optiene el valor de cada campo de la tabla
+						@$idsoll=$u['MAX(id)'];}
+					$id_solicitud=$idsoll+1;
+
 						if(@$estatus=="i"){
 						echo "<script>alert('Solicitante inactivo, para ser activado nuevamente contacte al administrador del sistema.')</script>";//Mensaje de Registro válida
 						echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/solicitud/sql/'>"; // ir a la pantalla de inicio
 						}else{
-
-							//echo "<script>alert('Solicitud registrada con exito.')</script>";//Mensaje de Registro válida
-							//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitud.php?list=1'>"; // ir a la pantalla de inicio
-
 
 							$idu=@$_SESSION['idu'];
 
@@ -136,7 +140,7 @@
 							$insert->execute(array('fecha'=>$fecha, 'motivo'=>$motivo, 'estatus'=>'a','idsol'=>$idsol, 'idu'=>$idu, 'id_tipo'=>$id_tipo, 'id_subarea'=>$id_subarea));
 
 								if(empty($comentario)){
-									echo "<script>alert('Solicitud registrada con exito sin comentario.')</script>";//Mensaje de Registro válida
+									echo "<script>alert('Solicitud registrada con exito.')</script>";//Mensaje de Registro válida
 									echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitud.php?list=1'>"; // Otra manera de redireccionar, esta permite que el mensaje anterior sea mostrado...
 
 								}else{
@@ -146,7 +150,7 @@
 										//Excecute
 											$insert->execute(array('id_solicitud'=>$id_solicitud, 'comentario'=>$comentario));
 											 //retornar el resultado de la sentencia sql
-											echo "<script>alert('Solicitud registrada con exito con comentario.')</script>";//Mensaje de Registro válida
+											echo "<script>alert('Solicitud registrada con exito.')</script>";//Mensaje de Registro válida
 											echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitud.php?list=1'>"; // Otra manera de redireccionar, esta permite que el mensaje anterior sea mostrado...
 									}
 								}

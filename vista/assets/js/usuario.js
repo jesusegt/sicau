@@ -73,3 +73,53 @@ function usuario(f){
 				}
 
 			}
+
+/*function CambiaTipo(Frm)
+        {
+            var Campo=Frm.contrasena;
+            if(Campo.type=='password')
+                Frm.contrasena.type='text';
+            else    
+                Frm.contrasena.type='password';
+        }
+
+function CambiaTipo2(Frm)
+        {
+            var Campo=Frm.pw;
+            if(Campo.type=='password')
+                Frm.pw.type='text';
+            else    
+                Frm.pw.type='password';
+        }*/
+
+//input 1
+	$(document).on('mousedown', '.ojo', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#contrasena");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+	$(document).on('mouseup', '.ojo', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#contrasena");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+	
+//input 2
+	$(document).on('mousedown', '.ojo2', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#pw");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+	$(document).on('mouseup', '.ojo2', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#pw");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});

@@ -222,8 +222,9 @@
 					}else{
 					@$_SESSION['TipoUsu']=$tipo;
 					@$_SESSION['CedulaTipoUsu']=$cit;
-					@$_SESSION['nombreusu']=$nombre;
-					@$_SESSION['apeusu']=$apellido;
+					@$_SESSION['perfilusuario']=$nombre." ".$apellido;
+					//@$_SESSION['nombreusu']=$nombre;
+					//@$_SESSION['apeusu']=$apellido;
 					@$_SESSION['idu']=$idu;//se optiene la sesion del tipo de usuario
 					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/'>"; // ir a la pantalla de inicio
 					}	
@@ -259,6 +260,7 @@
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$params = array ('cedula'=>$cedula);
 				$cambio = $result->execute($params);//ejecuta la sentencia sql
+				@$_SESSION['perfilusuario']=$nombre." ".$apellido;
 				return $cambio;
 
 				//retornar el resultado de la sentencia sql

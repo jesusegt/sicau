@@ -106,19 +106,6 @@ session_start();
 							</select>
 						</div>
 						</div>
-						<div class='form-group' style='display: none;'>
-						<?php include('../../../modelo/conexionpdo.php');
-							$sql = "SELECT MAX(id) FROM solicitud";
-									$result = $con->prepare($sql);//preparar la sentencia sql
-									$result->execute(); //ejecuta la sentencia sql
-									$data = $result->fetchAll();
-									foreach($data as $u){//se optiene el valor de cada campo de la tabla
-									@$idsol=$u['MAX(id)'];}
-
-									$id_solicitud=$idsol+1;
-						?>
-							<input type='text' class='form-control' name='id_solicitud' placeholder='...' value='<?php echo $id_solicitud; ?>' autocomplete='off'>
-						</div>
 						<div class='form-group'>
 							<label for='comentario'>Comentario</label>
 							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4'></textarea>

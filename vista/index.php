@@ -1,8 +1,8 @@
 <?php
 session_start();
 $ciclave=@$_SESSION['CedulaTipoUsu'];
-$nombreusu=@$_SESSION['nombreusu'];
-$apeusu=@$_SESSION['apeusu'];
+//$nombreusu=@$_SESSION['nombreusu'];
+//$apeusu=@$_SESSION['apeusu'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,13 +12,18 @@ $apeusu=@$_SESSION['apeusu'];
 		<link rel='stylesheet' type='text/css' href='assets/css/menuazul.css'>
 		<script type='text/javascript' src='assets/js/menuazul.js'></script>
 	</head>
-	<body>
+	<body <?php 
+			$cambio1=@$_SESSION['cambio'];
+			if($cambio1 == 'a'){
+				$onload= "document.getElementById('A').click();";
+			?> onload="<?php echo $onload;?>"
+			<?php } ?>>
 
 		<header>
 
 				<nav>
 					<div class='contenido logo-nav'>
-						<a href='index.php' class='logo'>SICAU-SG</a>
+						<a href='index.php?cambio1=0' class='logo'>SICAU-SG</a>
 					<ul class='menu'>
 						<li><a href='#'>Archivos</a>
 							<ul class='submenu'>
@@ -62,9 +67,9 @@ $apeusu=@$_SESSION['apeusu'];
 						</li>
 					</ul>
 					<ul class='menu-usuario'>
-						<li><span onclick='mostrar()'><?php echo $nombreusu.' '.$apeusu; ?></span>
+						<li><span onclick='mostrar()'><?php echo $_SESSION['perfilusuario']; ?></span>
 							<ul class='submenu-usuario' id='submenu-usuario'>
-								<li><a href='../controlador/ctr_usuario.php?sql=v&ci=<?php echo $ciclave; ?>' target='inferior'>Perfil</a></li>
+								<li><a href='../controlador/ctr_usuario.php?sql=v&ci=<?php echo $ciclave; ?>' target='inferior' id="A">Perfil</a></li>
 								<li><a href='../controlador/ctr_usuario.php?sql=k&ci=<?php echo $ciclave; ?>' target='inferior'>Cambiar Contraseña</a></li>
 								<li><a href='../controlador/ctr_usuario.php?salir=1'>Cerrar Sesion</a></li>
 							</ul>
