@@ -32,14 +32,16 @@
 		/* CATALAGO */
 			public function Listar(){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
+				//FROM sol_per AS sp INNER JOIN solicitante AS s ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE
 
 				$sql = "SELECT a.id AS idact,
 								a.fecha AS fechaact,
 								s.cedula AS cedulasol, 
 								s.nombre AS nombresol,
 								s.apellido AS apellidosol
-						FROM actividad AS a INNER JOIN solicitante AS s 
-						ON a.id_sol=s.id ORDER BY a.id ASC";//consulto si existe el registro
+						FROM sol_act AS sa INNER JOIN solicitante AS s 
+						ON sa.id_sol=s.id INNER JOIN actividad AS a 
+						ON sa.id_act=a.id ORDER BY a.id ASC";//consulto si existe el registro
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$result->execute();
 				return $result->fetchAll(PDO::FETCH_OBJ);
@@ -97,22 +99,49 @@
 									if(empty($data)){
 
 
-										$sql = "SELECT * FROM actividad WHERE id_sol=$idsol AND fecha='$this->fecha'";//sentencia sql para consultar
+										$sql = "SELECT * FROM sol_act AS sa INNER JOIN solicitante AS s 
+														ON sa.id_sol=s.id INNER JOIN actividad AS a 
+														ON sa.id_act=a.id WHERE sa.id_sol=$idsol AND a.fecha='$this->fecha'";//sentencia sql para consultar
 										$result = $con->prepare($sql);//preparar la sentencia sql
 						    			$result->execute(); //ejecuta la sentencia sql
 										$data = $result->fetchAll();
 											if(empty($data)){
-												echo "<script>alert('Actividad registrada con exito.')</script>";//Mensaje de Registro válida
-												echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_actividad.php?list=1'>"; // ir a la pantalla de inicio
+												$sql = "SELECT MAX(id) FROM actividad";
+												$result = $con->prepare($sql);//preparar la sentencia sql
+												$result->execute(); //ejecuta la sentencia sql
+												$data = $result->fetchAll();
+												foreach($data as $u){//se optiene el valor de cada campo de la tabla
+												@$idactv=$u['MAX(id)'];}
+												
+												$id_actividad=$idactv+1;
+												
+												if(empty($data)) {
+													echo"<script>alert('Error')</script>";
+												}else{
 
+													/*echo "<script>alert('Actividad registrada con exito.')</script>";//Mensaje de Registro válida
+													echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_actividad.php?list=1'>"; // ir a la pantalla de inicio*/
 
-												$idu=@$_SESSION['idu'];
+													$idu=@$_SESSION['idu'];
 
-												$sql = "INSERT INTO actividad (fecha, id_sol, id_usu)VALUES (:fecha, :idsol, :idu)"; //sentencia sql para registrar 
-												$insert = $con->prepare($sql); //preparar la sentencia sql
-													//Excecute
-												$insert->execute(array('fecha'=>$fecha, 'idsol'=>$idsol, 'idu'=>$idu));
-												return $insert;
+													$sql = "INSERT INTO actividad (fecha, id_usu)VALUES (:fecha, :idu)"; //sentencia sql para registrar 
+													$insert = $con->prepare($sql); //preparar la sentencia sql
+														//Excecute
+													$insert->execute(array('fecha'=>$fecha, 'idu'=>$idu));
+
+														if($id_actividad){
+															echo "<script>alert('Actividad registrada con exito.')</script>";//Mensaje de Registro válida
+															echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_actividad.php?list=1'>"; // ir a la pantalla de inicio
+															$sql = "INSERT INTO sol_act (id_sol, id_act)VALUES (:idsol, :idact)"; //sentencia sql para registrar 
+															$insert = $con->prepare($sql); //preparar la sentencia sql
+																//Excecute
+															$insert->execute(array('idsol'=>$idsol, 'idact'=>$id_actividad));
+
+														}else{
+															echo"<script>alert('Error2')</script>";
+														}
+												}
+
 
 											}else{
 													echo "<script>alert('Ya fue registrada la actividad el día de hoy.')</script>";//Mensaje de Registro válida

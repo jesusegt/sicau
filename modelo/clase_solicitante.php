@@ -125,7 +125,7 @@
 							echo "<script>alert('Solicitante registrado con exito.')</script>";//Mensaje de Registro válida
 							echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitante.php?list=1'>"; // Otra manera de redireccionar, esta permite que el mensaje anterior sea mostrado...
 						}else{
-							$sql = "INSERT INTO correo_sol (cedula_sol, correo)VALUES (:cedula, :correo)"; //sentencia sql para registrar 
+							$sql = "INSERT INTO solicitante_correo (cedula_sol, correo)VALUES (:cedula, :correo)"; //sentencia sql para registrar 
 							$insert = $con->prepare($sql); //preparar la sentencia sql
 						//Excecute
 							$insert->execute(array('cedula'=>$cedula, 'correo'=>$correo));
@@ -141,7 +141,7 @@
 			public function ConsultarSolicitante($cedula){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-				$sql = "SELECT * FROM correo_sol WHERE cedula_sol=:cedula";//sentencia sql para consultar
+				$sql = "SELECT * FROM solicitante_correo WHERE cedula_sol=:cedula";//sentencia sql para consultar
 					$result = $con->prepare($sql);//preparar la sentencia sql
 			    	$params = array('cedula'=>$cedula); 
 			    	$result->execute($params); //ejecuta la sentencia sql
@@ -175,7 +175,7 @@
 									c.estatus AS estatuscar,
 									a.cedula_sol AS cedulacor,
 									a.correo AS correo
-							FROM solicitante AS s, cargo AS c, correo_sol AS a 
+							FROM solicitante AS s, cargo AS c, solicitante_correo AS a 
 							WHERE s.cedula=:cedula AND s.id_cargo=c.id AND a.cedula_sol=:cedula";//sentencia sql para consultar
 					$result = $con->prepare($sql);//preparar la sentencia sql
 				    	$params = array('cedula'=>$cedula); 
@@ -232,7 +232,7 @@
 			public function MostrarSolicitante($cedula){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-					$sql = "SELECT * FROM correo_sol WHERE cedula_sol=:cedula";//sentencia sql para consultar
+					$sql = "SELECT * FROM solicitante_correo WHERE cedula_sol=:cedula";//sentencia sql para consultar
 					$result = $con->prepare($sql);//preparar la sentencia sql
 			    	$params = array('cedula'=>$cedula); 
 			    	$result->execute($params); //ejecuta la sentencia sql
@@ -266,7 +266,7 @@
 									c.estatus AS estatuscar,
 									a.cedula_sol AS cedulacor,
 									a.correo AS correo
-							FROM solicitante AS s, cargo AS c, correo_sol AS a 
+							FROM solicitante AS s, cargo AS c, solicitante_correo AS a 
 							WHERE s.cedula=:cedula AND s.id_cargo=c.id AND a.cedula_sol=:cedula";//sentencia sql para consultar
 					$result = $con->prepare($sql);//preparar la sentencia sql
 				    	$params = array('cedula'=>$cedula); 
@@ -289,14 +289,14 @@
 							echo "<script>alert('Solicitante actualizado con exito.')</script>";//Mensaje de Registro válida
 							echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitante.php?list=1'>"; // Otra manera de redireccionar, esta permite que el mensaje anterior sea mostrado...
 						}else{
-							$sql = "SELECT * FROM correo_sol WHERE cedula_sol=:cedula";
+							$sql = "SELECT * FROM solicitante_correo WHERE cedula_sol=:cedula";
 							$result = $con->prepare($sql);//preparar la sentencia sql
 					    	$params = array('cedula'=>$cedula); 
 					    	$result->execute($params); //ejecuta la sentencia sql
 							$data = $result->fetchAll();
 
 							if(empty($data)){
-								$sql = "INSERT INTO correo_sol (cedula_sol, correo)VALUES (:cedula, :correo)"; //sentencia sql para registrar 
+								$sql = "INSERT INTO solicitante_correo (cedula_sol, correo)VALUES (:cedula, :correo)"; //sentencia sql para registrar 
 								$insert = $con->prepare($sql); //preparar la sentencia sql
 							//Excecute
 								$insert->execute(array('cedula'=>$cedula, 'correo'=>$correo));
@@ -304,7 +304,7 @@
 								echo "<script>alert('Solicitante actualizado con exito.')</script>";//Mensaje de Registro válida
 								echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitante.php?list=1'>"; // Otra manera de redireccionar, esta permite que el mensaje anterior sea mostrado...
 							}else{
-								$sql = "UPDATE correo_sol SET correo='$correo' WHERE cedula_sol=:cedula";//sentencia sql para actualizar
+								$sql = "UPDATE solicitante_correo SET correo='$correo' WHERE cedula_sol=:cedula";//sentencia sql para actualizar
 								$result = $con->prepare($sql);//preparar la sentencia sql
 								$params = array ('cedula'=>$cedula);
 								$cambio = $result->execute($params);

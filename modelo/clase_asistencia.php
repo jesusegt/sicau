@@ -123,7 +123,7 @@
 												$sql = "INSERT INTO asistencia (fecha, hora, accion, id_sol)VALUES (:fecha, :hora, :accion, :idsol)"; //sentencia sql para registrar 
 												$insert = $con->prepare($sql); //preparar la sentencia sql
 													//Excecute
-												$insert->execute(array('fecha'=>$fecha, 'hora'=>$hora, 'accion'=>'Entrada', 'idsol'=>$idsol));
+												$insert->execute(array('fecha'=>$fecha, 'hora'=>$hora, 'accion'=>'entrada', 'idsol'=>$idsol));
 												//return $insert;
 
 											}else{
@@ -133,7 +133,7 @@
 													$sql = "INSERT INTO asistencia (fecha, hora, accion, id_sol)VALUES (:fecha, :hora, :accion, :idsol)"; //sentencia sql para registrar 
 													$insert = $con->prepare($sql); //preparar la sentencia sql
 													//Excecute
-													$insert->execute(array('fecha'=>$fecha, 'hora'=>'hora', 'accion'=>'Salida', 'idsol'=>$idsol));
+													$insert->execute(array('fecha'=>$fecha, 'hora'=>$hora, 'accion'=>'salida', 'idsol'=>$idsol));
 													echo "<script>alert('Hora de salida registrada con exito.')</script>";//Mensaje de Registro válida
 													echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../index.html'>";
 													//return $insert;

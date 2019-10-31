@@ -59,8 +59,8 @@
 								s.cedula AS cedulasol, 
 								s.nombre AS nombresol,
 								s.apellido AS apellidosol
-						FROM permiso AS p INNER JOIN solicitante AS s 
-						ON p.id_sol=s.id WHERE p.estatus='a'";//consulto si existe el registro
+						FROM sol_per AS sp INNER JOIN solicitante AS s 
+						ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE p.estatus='a'";//consulto si existe el registro
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$result->execute();
 				return $result->fetchAll(PDO::FETCH_OBJ);
@@ -77,8 +77,8 @@
 								s.cedula AS cedulasol, 
 								s.nombre AS nombresol,
 								s.apellido AS apellidosol
-						FROM permiso AS p INNER JOIN solicitante AS s 
-						ON p.id_sol=s.id WHERE p.estatus='i'";//consulto si existe el registro
+						FROM sol_per AS sp INNER JOIN solicitante AS s 
+						ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE p.estatus='i'";//consulto si existe el registro
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$result->execute();
 				return $result->fetchAll(PDO::FETCH_OBJ);
@@ -112,21 +112,43 @@
 							echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/permiso/sql/?sql=a'>"; // ir a la pantalla de inicio
 
 						}else{
-
-							$sql = "SELECT * FROM permiso WHERE id=$idsol AND (fecha_inicial<='$this->fecha_inicial' AND fecha_final >= '$this->fecha_final')";//sentencia sql para consultar
+							// FROM sol_per AS sp INNER JOIN solicitante AS s ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE
+							$sql = "SELECT * FROM sol_per AS sp INNER JOIN permiso AS p ON sp.id_per=p.id WHERE sp.id_sol=$idsol AND (p.fecha_inicial<='$this->fecha_inicial' AND p.fecha_final >= '$this->fecha_final')";//sentencia sql para consultar
 							$result = $con->prepare($sql);//preparar la sentencia sql
 						    $result->execute(); //ejecuta la sentencia sql
 							$data = $result->fetchAll();
 
 							if(empty($data)){
-
-								echo "<script>alert('Permiso registrado con exito.')</script>";//Mensaje de Registro válida
-								echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../controlador/ctr_permiso.php?list=1'>"; // ir a la pantalla de inicio
-								$sql = "INSERT INTO permiso (motivo, fecha_inicial, fecha_final, id_sol, estatus)VALUES (:motivo, :fecha_inicial, :fecha_final, :id, :estatus)"; //sentencia sql para registrar 
-								$insert = $con->prepare($sql); //preparar la sentencia sql
-									//Excecute
-								$insert->execute(array('motivo'=>$motivo, 'fecha_inicial'=>$fecha_inicial, 'fecha_final'=>$fecha_final, 'id'=>$idsol, 'estatus'=>'a'));
-								return $insert;
+								$sql = "SELECT MAX(id) FROM permiso";
+								$result = $con->prepare($sql);//preparar la sentencia sql
+								$result->execute(); //ejecuta la sentencia sql
+								$data = $result->fetchAll();
+								foreach($data as $u){//se optiene el valor de cada campo de la tabla
+								@$idperm=$u['MAX(id)'];}
+												
+								$id_permiso=$idperm+1;
+								if (empty($data)) {
+									echo "<script>alert('Error.')</script>";
+								}else{
+									/*echo "<script>alert('Permiso registrado con exito.')</script>";//Mensaje de Registro válida
+									echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../controlador/ctr_permiso.php?list=1'>"; // ir a la pantalla de inicio*/
+									$sql = "INSERT INTO permiso (motivo, fecha_inicial, fecha_final, estatus)VALUES (:motivo, :fecha_inicial, :fecha_final, :estatus)"; //sentencia sql para registrar 
+									$insert = $con->prepare($sql); //preparar la sentencia sql
+										//Excecute
+									$insert->execute(array('motivo'=>$motivo, 'fecha_inicial'=>$fecha_inicial, 'fecha_final'=>$fecha_final, 'estatus'=>'a'));
+									//return $insert;
+										if($id_permiso){
+											echo "<script>alert('Permiso registrado con exito.')</script>";//Mensaje de Registro válida
+											echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../controlador/ctr_permiso.php?list=1'>"; // ir a la pantalla de inicio
+											$sql = "INSERT INTO sol_per (id_sol, id_per)VALUES (:id, :id_per)"; //sentencia sql para registrar 
+											$insert = $con->prepare($sql); //preparar la sentencia sql
+												//Excecute
+											$insert->execute(array('id'=>$idsol, 'id_per'=>$id_permiso));
+											//return $insert;
+										}else{
+											echo "<script>alert('Error2.')</script>";
+										}
+								}
 
 							}else{
 
@@ -154,8 +176,9 @@
 								s.cedula AS cedulasol, 
 								s.nombre AS nombresol,
 								s.apellido AS apellidosol
-						FROM permiso AS p INNER JOIN solicitante AS s 
-						ON p.id_sol=s.id WHERE p.id=:id";//sentencia sql para consultar
+						FROM sol_per AS sp INNER JOIN solicitante AS s 
+						ON sp.id_sol=s.id INNER JOIN permiso AS p 
+						ON sp.id_per=p.id WHERE p.id=:id";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
 			    	$params = array('id'=>$id); 
 			    	$result->execute($params); //ejecuta la sentencia sql
@@ -166,14 +189,15 @@
 		/* MOSTRAR */
 			public function MostrarPermiso($id){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
-				
+				// FROM sol_per AS sp INNER JOIN solicitante AS s ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE
 				$sql = "SELECT p.id AS idperm,
 								p.motivo AS motivo,
 								p.fecha_inicial AS fechaini,
 								p.fecha_final AS fechafin,
 								s.cedula AS cedulasol
-						FROM permiso AS p INNER JOIN solicitante AS s 
-						ON p.id_sol=s.id WHERE p.id=:id";//sentencia sql para consultar
+						FROM sol_per AS sp INNER JOIN solicitante AS s 
+						ON sp.id_sol=s.id INNER JOIN permiso AS p 
+						ON sp.id_per=p.id  WHERE p.id=:id";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$params = array ('id'=>$id);
 				$result->execute($params);//ejecuta la sentencia sql
@@ -208,7 +232,7 @@
 						}else{
 							echo "<script>alert('Permiso actualizado con exito.')</script>";//Mensaje de Registro válida
 							echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../controlador/ctr_permiso.php?list=1'>"; // ir a la pantalla de inicio
-							$sql = "UPDATE permiso SET motivo='$motivo', fecha_inicial='$fecha_inicial', fecha_final='$fecha_final', id_sol='$id_sol' WHERE id=:id"; //sentencia sql para registrar 
+							$sql = "UPDATE permiso SET motivo='$motivo', fecha_inicial='$fecha_inicial', fecha_final='$fecha_final' WHERE id=:id"; //sentencia sql para registrar 
 							$result = $con->prepare($sql);//preparar la sentencia sql
 							$params = array ('id'=>$id);
 							$cambio = $result->execute($params);//ejecuta la sentencia sql

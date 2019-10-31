@@ -18,8 +18,12 @@ session_start();
 		<div class='contenedor'>
 			<h1 class='page-title'>
 				<i></i>
-				Actividades
+				Solicitudes 
 			</h1>
+			<a href='../../controlador/ctr_solicitud.php?list=2' class='btn btn-primary'>
+				<i></i>
+				<span>Solicitudes Completadas</span>
+			</a>
 		</div>
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
@@ -33,9 +37,10 @@ session_start();
 								<tr>
 									<th>Cedula</th>
 									<th>Nombre y Apellido</th>
-									<th>Motivo</th>
+									<!--<th>Motivo</th>-->
 									<th>Tipo</th>
 									<th>Fecha</th>
+									<th class='actions text-right'>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,7 +53,7 @@ session_start();
 									<tr>
 										<td><?php echo $r->cedulasol; ?></td>
 										<td><?php echo $r->nombresol." ".$r->apellidosol; ?></td>
-										<td><?php echo $r->motivosoli; ?></td>
+										<!--<td><?php echo $r->motivosoli; ?></td>-->
 										<td><?php echo $r->tiposol; ?></td>
 										<td>
 											<?php 
@@ -56,6 +61,10 @@ session_start();
 												$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
 												echo $fecha_nueva;
 											?>
+										</td>
+										<td>
+											<a onclick="javascript:return confirm('¿Seguro de completar este registro?');" href="../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $r->idsoli; ?>" class='btn btn-add-new pull-right' style='margin-left: 3px;'>Completar</a>
+											<a href="../../controlador/ctr_solicitud.php?sql=c&id=<?php echo $r->idsoli; ?>" class='btn btn-warning pull-right'>Ver</a>
 										</td>
 									</tr>
 								<?php endforeach; 

@@ -2,7 +2,7 @@
 
 try {
 	//paso de nombre del servidor y de la base de datos
-	$dsn = "mysql:host=localhost;dbname=sicau";
+	$dsn = "mysql:host=localhost;dbname=sicauu";
 	//nombre del usuario en MySQL
 	$usuario="root";
 	//clave del usuario en MySQL

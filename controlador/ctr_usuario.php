@@ -258,7 +258,7 @@
 
 		}else //Si el areglo NO retornó vacío
 		{	
-			$cambio="a";
+			$cambio="b";
 			$_SESSION['cambio']= $cambio;
 			echo "<script>alert('Datos actualizados con exito')</script>";//Mensaje de Registro válida
 			//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_usuario.php?sql=v&ci=$cedula'>"; // ir a la pantalla de inicio

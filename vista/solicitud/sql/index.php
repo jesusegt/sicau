@@ -122,9 +122,386 @@ session_start();
 			</div>
 		</div>
 <?php 
-	}
-?>		
+	}if($sql=="c"){//si se trata de una consulta 
+
+@$datosc = $_SESSION['selectid'];//arreglo que trae los datos de la tabla
+foreach($datosc as $c){
+	//se optiene el valor de cada campo de la tabla
+	@$nombresol=$c['nombresol'];
+	@$apellidosol=$c['apellidosol'];
+	@$cedulasol=$c['cedulasol'];
+	@$tipo=$c['tipo'];
+	@$area=$c['area'];
+	@$subarea=$c['subarea'];
+	@$fecha=$c['fecha'];
+	@$motivo=$c['motivo'];
+	@$comentario=$c['comentario'];
+	@$idsoli=$c['idsoli'];
+
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>SICAU-SG</title>
+	<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
+	<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+</head>
+<body>
+
+	<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Viendo Solicitud
+			</h1>
+			&nbsp;
+			<a href='../../../controlador/ctr_solicitud.php?list=1' class='btn btn-warning'>
+				<i></i>
+				<span>Volver a la lista</span>
+			</a>
+			<a onclick="javascript:return confirm('¿Seguro de completar este registro?');" href="../../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $idsoli; ?>" class='btn btn-add-new' style='margin-left: 3px;'>Completar</a>
+			
+		</div>
+
+		<div class='contenedor'>
+			<div class='panel panel-bordered' style='padding-bottom: 5px;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Cédula</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$cedulasol"; ?></p>
+				</div>	
+
+				<hr style='margin:0;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Nombre y Apellido</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$nombresol $apellidosol"; ?></p>
+				</div>	
+
+				<hr style='margin:0;'>
 
 
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Motivo</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$motivo"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Tipo</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$tipo"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Area</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$area"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Subarea</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$subarea"; ?></p>
+				</div>
+
+				<?php if($comentario){ ?>
+
+				<hr style='margin:0;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Comentario</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$comentario"; ?></p>
+				</div>
+
+				<?php } ?>
+
+				<hr style='margin:0;'>	
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Fecha</h3>
+				</div>
+				<div class='panel-body' style='padding-top: 0;'>
+					<p>
+						<?php
+							$fecha_bd= $fecha;
+							$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+							echo $fecha_nueva;
+						?>
+					</p>
+				</div>
+<?php }
+if($sql=='i'){ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>SICAU-SG</title>
+	<link rel='stylesheet' type='text/css' href='../../assets/data/datatables.min.css'>
+	<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
+	<link rel='stylesheet' type='text/css' href='../../assets/data/main.css'>
+
+</head>
+<body>
+
+
+		<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Solicitudes Completadas
+			</h1>
+			<a href='../../../controlador/ctr_solicitud.php?list=1' class='btn btn-warning'>
+				<i></i>
+				<span>Volver</span>
+				
+			</a>
+		</div>
+		<div class='contenedor'>
+			<div class='panel panel-bordered'>
+				<div class='panel-body'>
+					<!--<div class='busqueda'>
+						<input type='text' name='buscar' placeholder='Buscar' class='inputbusqueda' id='buscar'>
+					</div>-->
+					<div class='tabla'>
+						<table class='table table-hover' id='tabla'>
+							<thead>
+								<tr>
+									<th>Cedula</th>
+									<th>Nombre y Apellido</th>
+									<!--<th>Motivo</th>-->
+									<th>Tipo</th>
+									<th>Fecha Solicitud</th>
+									<th>Fecha Completada</th>
+									<th class='actions text-right'>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									if(@$_SESSION['catalago']){
+									@$datoss = $_SESSION['catalago'];//arreglo que trae los datos de la tabla
+
+									foreach(@$datoss as $r): 
+								?>
+									<tr>
+										<td><?php echo $r->cedulasol; ?></td>
+										<td><?php echo $r->nombresol." ".$r->apellidosol; ?></td>
+										<!--<td><?php echo $r->motivosoli; ?></td>-->
+										<td><?php echo $r->tipo; ?></td>
+										<td>
+											<?php 
+												$fecha_bd= $r->fechasoli;
+												$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+												echo $fecha_nueva;
+											?>
+										</td>
+										<td>
+											<?php 
+												$fecha_bd1= $r->fechaser;
+												$fecha_nueva1 = date('d-m-Y', strtotime($fecha_bd1));
+												echo $fecha_nueva1;
+											?>
+										</td>
+										<td>
+											<a href="../../../controlador/ctr_solicitud.php?sql=k&id=<?php echo $r->idsoli; ?>" class='btn btn-warning pull-right'>Ver</a>
+										</td>
+									</tr>
+								<?php endforeach; 
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+					<!--
+						<div class='pull-left'>
+							<div class='show-res'>
+								Mostrando todas las entradas
+							</div>
+						</div>
+						<div class='pull-right'>
+								<ul class='pagination' id='pagina'>
+									
+								</ul>
+						</div>
+					-->
+				</div>
+			</div>
+		</div>
+
+<script type='text/javascript' src='../../assets/data/jquery/jquery-3.3.1.min.js'></script>
+<script type='text/javascript' src='../../assets/data/datatables.min.js'></script>
+<script type='text/javascript' src='../../assets/data/main.js'></script>
+
+	<?php 
+	$_SESSION['list']=null;
+	$_SESSION['sql']=null;
+	$_SESSION['selectid']=null;
+	$_SESSION['mostrarper']=null;
+	$_SESSION['catalago']=null; 
+	?>	
+
+<?php }if($sql=="k"){//si se trata de una consulta 
+
+@$datosk = $_SESSION['selectid'];//arreglo que trae los datos de la tabla
+foreach($datosk as $k){
+	//se optiene el valor de cada campo de la tabla
+	@$nombresol=$k['nombresol'];
+	@$apellidosol=$k['apellidosol'];
+	@$cedulasol=$k['cedulasol'];
+	@$tipo=$k['tipo'];
+	@$area=$k['area'];
+	@$subarea=$k['subarea'];
+	@$fecha=$k['fecha'];
+	@$motivo=$k['motivo'];
+	@$comentario=$k['comentario'];
+	@$fechasoli=$k['fechasoli'];
+	@$fechaser=$k['fechaser'];
+
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>SICAU-SG</title>
+	<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
+	<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+</head>
+<body>
+
+	<div class='contenedor'>
+			<h1 class='page-title'>
+				<i></i>
+				Viendo Solicitud
+			</h1>
+			&nbsp;
+			<a href='../../../controlador/ctr_solicitud.php?list=2' class='btn btn-warning'>
+				<i></i>
+				<span>Volver a la lista</span>
+			</a>
+			
+		</div>
+
+		<div class='contenedor'>
+			<div class='panel panel-bordered' style='padding-bottom: 5px;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Cédula</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$cedulasol"; ?></p>
+				</div>	
+
+				<hr style='margin:0;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Nombre y Apellido</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$nombresol $apellidosol"; ?></p>
+				</div>	
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Motivo</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$motivo"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Tipo</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$tipo"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Area</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$area"; ?></p>
+				</div>
+
+				<hr style='margin:0;'>
+
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Subarea</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$subarea"; ?></p>
+				</div>
+
+				<?php if($comentario){ ?>
+
+				<hr style='margin:0;'>
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Comentario</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p><?php echo"$comentario"; ?></p>
+				</div>
+
+				<?php } ?>
+
+				<hr style='margin:0;'>	
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Fecha Solicitud</h3>
+				</div>
+				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
+					<p>
+						<?php
+							$fecha_bd= $fechasoli;
+							$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+							echo $fecha_nueva;
+						?>
+					</p>
+				</div>
+
+				<hr style='margin:0;'>	
+
+				<div class='panel-heading' style='border-bottom: 0;'>
+					<h3 class='panel-title'>Fecha Completada</h3>
+				</div>
+				<div class='panel-body' style='padding-top: 0;'>
+					<p>
+						<?php
+							$fecha_bd= $fechaser;
+							$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+							echo $fecha_nueva;
+						?>
+					</p>
+				</div>
+<?php } ?>
 	</body>
 </html>

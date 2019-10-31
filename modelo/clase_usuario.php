@@ -220,6 +220,7 @@
 					echo "<script>alert('Usuario Inactivo... Consulte al Administrador del Sistema.!!!')</script>";//Mensaje de Registro válida
 					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../'>"; // ir a la pantalla de inicio
 					}else{
+					@$_SESSION['cambio']='a';
 					@$_SESSION['TipoUsu']=$tipo;
 					@$_SESSION['CedulaTipoUsu']=$cit;
 					@$_SESSION['perfilusuario']=$nombre." ".$apellido;

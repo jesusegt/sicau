@@ -97,15 +97,6 @@ foreach($datosc as $c){
 			<div class='panel panel-bordered' style='padding-bottom: 5px;'>
 
 				<div class='panel-heading' style='border-bottom: 0;'>
-					<h3 class='panel-title'>ID</h3>
-				</div>
-				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>
-					<p><?php echo"$idperm"; ?></p>
-				</div>
-
-				<hr style='margin:0;'>
-
-				<div class='panel-heading' style='border-bottom: 0;'>
 					<h3 class='panel-title'>Cédula</h3>
 				</div>
 				<div class='panel-body panel-divisor padding-divisor' style='padding-top: 0;'>

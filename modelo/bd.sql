@@ -1,7 +1,7 @@
 
-CREATE DATABASE sicau;
+CREATE DATABASE sicauu;
 
-USE sicau;
+USE sicauu;
 
 CREATE TABLE cargo (
 id int(11) AUTO_INCREMENT,
@@ -58,7 +58,7 @@ PRIMARY KEY (id),
 FOREIGN KEY (id_cargo) REFERENCES cargo(id)
 )ENGINE=InnoDB;
 
-CREATE TABLE correo_sol (
+CREATE TABLE solicitante_correo (
 id int(11) AUTO_INCREMENT,
 cedula_sol varchar(10) NOT NULL,
 correo varchar(75) NOT NULL,
@@ -72,29 +72,19 @@ motivo varchar(50) NOT NULL,
 estatus char(1) NOT NULL,
 fecha_inicial date NOT NULL,
 fecha_final date NOT NULL,
-id_sol int NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (id_sol) REFERENCES solicitante(id)
+/*id_sol int NOT NULL,*/
+PRIMARY KEY (id)/*,
+FOREIGN KEY (id_sol) REFERENCES solicitante(id)*/
 )ENGINE=InnoDB;
 
-CREATE TABLE reposo (
-id int(11) AUTO_INCREMENT,
-motivo varchar(50) NOT NULL,
-estatus char(1) NOT NULL,
-fecha_inicial date NOT NULL,
-fecha_final date NOT NULL,
-id_sol int NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (id_sol) REFERENCES solicitante(id)
-)ENGINE=InnoDB;
 
 CREATE TABLE actividad (
 id int(11) AUTO_INCREMENT,
 fecha date NOT NULL,
-id_sol int NOT NULL,
+/*id_sol int NOT NULL,*/
 id_usu int NOT NULL,
 PRIMARY KEY (id),
-FOREIGN KEY (id_sol) REFERENCES solicitante(id),
+/*FOREIGN KEY (id_sol) REFERENCES solicitante(id),*/
 FOREIGN KEY (id_usu) REFERENCES usuario(id)
 )ENGINE=InnoDB;
 
@@ -150,14 +140,14 @@ PRIMARY KEY (id),
 FOREIGN KEY (id_solicitud) REFERENCES solicitud(id)
 )ENGINE=InnoDB;
 
-CREATE TABLE soli_serv (
+/*CREATE TABLE soli_serv (
 id int(11) AUTO_INCREMENT,
 id_sol int NOT NULL,
 id_serv int NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_sol) REFERENCES solicitante(id),
 FOREIGN KEY (id_serv) REFERENCES servicio(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB;*/
 
 CREATE TABLE sol_act (
 id int(11) AUTO_INCREMENT,
@@ -186,16 +176,6 @@ FOREIGN KEY (id_sol) REFERENCES solicitante(id),
 FOREIGN KEY (id_per) REFERENCES permiso(id)
 )ENGINE=InnoDB;
 
-CREATE TABLE sol_rep (
-id int(11) AUTO_INCREMENT,
-id_sol int NOT NULL,
-id_rep int NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (id_sol) REFERENCES solicitante(id),
-FOREIGN KEY (id_rep) REFERENCES reposo(id)
-)ENGINE=InnoDB;
-
-
 
 INSERT INTO `usuario`(`id`, `cedula`, `nombre`, `apellido`, `tipo`, `nombre_usu`, `contrasena`, `estatus`) 
 VALUES ('1','12345678','admin','admin','adm','admin','123','a');
@@ -209,9 +189,9 @@ VALUES (NULL, '27529516', 'Jesus', 'Gonzalez', 'm', '0412-1527833', 'a', '1');
 INSERT INTO `solicitante` (`id`, `cedula`, `nombre`, `apellido`, `sexo`, `telefono`, `estatus`, `id_cargo`) 
 VALUES (NULL, '27166703', 'Heleana', 'Hammad', 'f', '0414-5224172', 'a', '1');
 
-INSERT INTO `correo_sol` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27529516', 'jegt18@gmail.com');
+INSERT INTO `solicitante_correo` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27529516', 'jegt18@gmail.com');
 
-INSERT INTO `correo_sol` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27166703', 'heleanakh01@gmail.com');
+INSERT INTO `solicitante_correo` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27166703', 'heleanakh01@gmail.com');
 
 
 
