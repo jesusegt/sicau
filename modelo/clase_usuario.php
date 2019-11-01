@@ -63,12 +63,12 @@
 				}
 		// contrasena
 			//setters
-				public function setClavea($clavea){
-					$this->clavea = $clavea;
+				public function setContrasena_actual($contrasena_actual){
+					$this->contrasena_actual = $contrasena_actual;
 				}
 			//getters
-				public function getClavea(){
-					return $this->contrasena;
+				public function getContrasena_actual(){
+					return $this->contrasena_actual;
 				}	
 
 
@@ -295,7 +295,7 @@
 					
 				}
 				if(empty($data)){ //Si el método, retorna un arreglo vacío;
-					echo "<script>alert('Usuario y/o Contraseña inválido(s)... Verifique nuevamente.!!!')</script>";//Mensaje de Registro no válida
+					echo "<script>alert('Usuario y/o Contraseña inválido(s)... Verifique nuevamente.a!!!')</script>";//Mensaje de Registro no válida
 					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>"; // ir a la pantalla de inicio
 				}else{ //Si el areglo NO retornó vacío	
 					if(@$estatus=="I"){
@@ -311,14 +311,26 @@
 			}
 
 		/* CAMBIAR COTRASEÑA */
-			public function CambiarContrasena($cedula,$contrasena,$clavea){
+			public function CambiarContrasena($cedula,$contrasena_actual,$contrasena){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-				$sql = "UPDATE usuario SET contrasena='$contrasena' WHERE cedula=:cedula";//consulto si existe el registro
+				$sql = "SELECT * FROM usuario WHERE cedula='$this->cedula' AND contrasena='$this->contrasena_actual'";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
-				$params = array ('cedula'=>$cedula);
-				$cambio = $result->execute($params);//ejecuta la sentencia sql
-				return $cambio;//retornar el resultado de la sentencia sql
+		    	$result->execute(); //ejecuta la sentencia sql
+				$data = $result->fetchAll();//Acomoda en un arreglo el resultado de la búsqueda
+
+				if(empty($data)){
+					echo "<script>alert('Contraseña Actual Invalida.')</script>";//Mensaje de Registro no válida
+					//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>";
+				}else{
+					echo "<script>alert('Contraseña cambiada con exito')</script>";//Mensaje de Registro válida
+					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>"; // ir a la pantalla de inicio
+					$sql = "UPDATE usuario SET contrasena='$contrasena' WHERE cedula=:cedula";//consulto si existe el registro
+					$result = $con->prepare($sql);//preparar la sentencia sql
+					$params = array ('cedula'=>$cedula);
+					$cambio = $result->execute($params);//ejecuta la sentencia sql
+					//return $cambio;//retornar el resultado de la sentencia sql
+				}
 					
 			}	
 

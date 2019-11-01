@@ -315,14 +315,13 @@
 	/*### CAMBIAR CONTRASEÑA ##############################################################*/
 	/*=============================================================================*/
 	if(isset($_POST['pw']) && $_POST['pw']=="Guardar"){//verifica que se alla presionado el boton especifico
-		$cedula = $_POST['cedula'];
-		$contrasena = $_POST['contrasena'];
-		$clavea = $_POST['pwa'];
-		$usu->setClavea($_POST['pwa']);
-		$usu->setContrasena($_POST['pwa']);
 
-		$datos = $usu->CambiarContrasena($cedula,$contrasena,$clavea);//Invocamos al método de actualizar persona recibiendo la cedula
-		if(empty($datos)) //Si el método, retorna un arreglo vacío
+		$usu->setCedula($_POST['cedula']);
+		$usu->setContrasena_actual($_POST['contrasena_actual']);
+		$usu->setContrasena($_POST['contrasena']);
+
+		$datos = $usu->CambiarContrasena($_POST['cedula'], $_POST['contrasena_actual'], $_POST['contrasena']);//Invocamos al método de actualizar persona recibiendo la cedula
+		/*if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 			echo "<script>alert('No se pudo actualizar los datos')</script>";//Mensaje de Registro no válida
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/perfilusuario/newcontrasena.php'>"; // ir a la pantalla de inicio
@@ -330,6 +329,6 @@
 		{			
 			echo "<script>alert('Contraseña cambiada con exito')</script>";//Mensaje de Registro válida
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>"; // ir a la pantalla de inicio
-		}	
+		}*/	
 	}
 ?>

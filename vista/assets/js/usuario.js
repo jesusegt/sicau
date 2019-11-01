@@ -74,6 +74,35 @@ function usuario(f){
 
 			}
 
+function validarcontrasena(f){
+			var contrasena_actual = f.contrasena_actual.value;
+			var contrasena = f.contrasena.value;
+			var pwc = f.pwc.value;
+	   		
+
+	   		if(!contrasena_actual){
+	                alert('Ingrese la contraseña actual');
+	                f.contrasena_actual.focus();
+	                return false;
+	        }
+	        if(!contrasena){
+	                alert('Ingrese la nueva contraseña');
+	                f.contrasena.focus();
+	                return false;
+	        }
+	        if(!pw){
+	                alert('Debe confirmar la nueva contraseña');
+	                f.pw.focus();
+	                return false;
+	        }
+	        if(contrasena != pw){
+	                alert ('Las nuevas contraseñas no coinciden');
+	                f.contrasena.focus();
+	                return false;
+	       
+	        }
+}
+
 /*function CambiaTipo(Frm)
         {
             var Campo=Frm.contrasena;
@@ -121,5 +150,21 @@ function CambiaTipo2(Frm)
 	    $(this).toggleClass("fa-eye fa-eye-slash");
 	    
 	    var input = $("#pw");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+
+//input 3
+	$(document).on('mousedown', '.ojo3', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#contrasena_actual");
+	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+	});
+	$(document).on('mouseup', '.ojo3', function() {
+
+	    $(this).toggleClass("fa-eye fa-eye-slash");
+	    
+	    var input = $("#contrasena_actual");
 	    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 	});

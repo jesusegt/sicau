@@ -5,7 +5,8 @@
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='assets/css/estilo.css'>
 		<link rel='stylesheet' type='text/css' href='assets/css/menublanco.css'>
-		<script type='text/javascript' src='assets/js/login.js'></script>
+		<link rel='stylesheet' type='text/css' href='assets/css/login.css'>
+		<link rel='stylesheet' type='text/css' href='assets/css/all.min.css'>		
 	</head>
 	<body>
 
@@ -31,12 +32,19 @@
 
 				<tr>
 					<td align='center'>
-						<input type='text' name='nombre_usu' maxlength='10' placeholder='Nombre de Usuario' class='tipotext' autocomplete='off' value=''>
+						<div class='busqueda'>
+						<input type='text' name='nombre_usu' maxlength='10' placeholder='Nombre de Usuario' class='inputbusqueda' autocomplete='off' value=''>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td align='center'>
-						<input type='password' name='contrasena' maxlength='10' placeholder='Contraseña' class='tipotext' autocomplete='off' value=''>
+						<div class='busqueda'>
+						<input type='password' name='contrasena' maxlength='10' placeholder='Contraseña' class='inputbusqueda' autocomplete='off' value='' id='contrasena'>
+						<span class='btn_buscar'>
+						<i class='far fa-eye-slash ojo' style='width: 20px; padding-top: 6px; padding-right: 8px; padding-bottom: 6px;'></i>
+						</span>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -53,5 +61,9 @@
 				</tr>
 			</table>
 		</form>
+<script type='text/javascript' src='assets/js/login.js'></script>
+<script type='text/javascript' src='assets/js/jquery.min.js'></script>
+<script type='text/javascript' src='assets/js/usuario.js'></script>
+<script type='text/javascript' src='assets/js/all.js'></script>
 	</body>
 </html>

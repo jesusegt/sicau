@@ -1,7 +1,7 @@
 
-CREATE DATABASE sicauu;
+CREATE DATABASE sicau;
 
-USE sicauu;
+USE sicau;
 
 CREATE TABLE cargo (
 id int(11) AUTO_INCREMENT,
@@ -158,6 +158,7 @@ FOREIGN KEY (id_sol) REFERENCES solicitante(id),
 FOREIGN KEY (id_act) REFERENCES actividad(id)
 )ENGINE=InnoDB;
 
+/*
 CREATE TABLE asis_diaferiado (
 id int(11) AUTO_INCREMENT,
 id_asis int NOT NULL,
@@ -165,7 +166,7 @@ id_dia_feriado int NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_asis) REFERENCES asistencia(id),
 FOREIGN KEY (id_dia_feriado) REFERENCES dia_feriado(id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB;*/
 
 CREATE TABLE sol_per (
 id int(11) AUTO_INCREMENT,

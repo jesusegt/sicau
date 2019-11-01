@@ -527,9 +527,6 @@ foreach($datosk as $k){
 foreach($datoso as $o){
 	//se optiene el valor de cada campo de la tabla
 	@$cedula=$o['cedula'];
-	@$nombre=$o['nombre'];
-	@$apellido=$o['apellido'];
-	@$tipo=$o['tipo'];
 	@$nombre_usu=$o['nombre_usu'];
 	@$contrasena=$o['contrasena'];
 }
@@ -540,7 +537,9 @@ foreach($datoso as $o){
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/newsolicitudes.css'>
-		<script type='text/javascript' src='../../assets/js/contrasena.js'></script>
+		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
+		<link rel='stylesheet' type='text/css' href='../../assets/css/all.min.css'>
+		
 	</head>
 	<body>
 
@@ -555,18 +554,25 @@ foreach($datoso as $o){
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
 
-				<form name='formulario' class='formulario' onsubmit='return validarcontrasena2(this)' method='post' action='../../../controlador/ctr_usuario.php'>
+				<form name='formulario' class='formulario' onsubmit='return validarcontrasena(this)' method='post' action='../../../controlador/ctr_usuario.php'>
 					<div class='panel-body'>
+						<div class='form-group' style='display: none;'>
+							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo"$cedula"; ?>' autocomplete='off'  maxlength='10' >
+						</div>
 						<div class='form-group'>
-							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo"$cedula"; ?>' autocomplete='off'  maxlength='10' style='display: none;'>
+							<label for='contrasena_actual'>Contraseña Actual</label>
+							<i class='far fa-eye-slash ojo3' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='contrasena_actual' placeholder='...' value='' autocomplete='off' id='contrasena_actual'>
 						</div>
 						<div class='form-group'>
 							<label for='contrasena'>Nueva Contraseña</label>
-							<input type='password' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off'>
+							<i class='far fa-eye-slash ojo' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off' id='contrasena'>
 						</div>
 						<div class='form-group'>
-							<label for='pwc'>Confirmar Contraseña</label>
-							<input type='password' class='form-control' name='pwc' placeholder='...' value='' autocomplete='off'>
+							<label for='pw'>Confirmar Contraseña</label>
+							<i class='far fa-eye-slash ojo2' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='pw' placeholder='...' value='' autocomplete='off' id='pw'>
 						</div>
 					</div>
 
@@ -575,6 +581,9 @@ foreach($datoso as $o){
 						<input type='submit' class='btn btn-primary save' name='pw' value='Guardar'>
 					</div>
 				</form>
+<script type='text/javascript' src='../../assets/js/jquery.min.js'></script>
+<script type='text/javascript' src='../../assets/js/usuario.js'></script>
+<script type='text/javascript' src='../../assets/js/all.js'></script>
 <?php 
 	}
 	if($sql=='i'){

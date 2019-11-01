@@ -70,7 +70,7 @@ $cambio1=@$_SESSION['cambio'];
 						<li><span onclick='mostrar()'><?php echo $_SESSION['perfilusuario']; ?></span>
 							<ul class='submenu-usuario' id='submenu-usuario'>
 								<li><a href='../controlador/ctr_usuario.php?sql=v&ci=<?php echo $ciclave; ?>' target='inferior' id="A">Perfil</a></li>
-								<li><a href='../controlador/ctr_usuario.php?sql=k&ci=<?php echo $ciclave; ?>' target='inferior'>Cambiar Contraseña</a></li>
+								<li><a href='../controlador/ctr_usuario.php?sql=o&ci=<?php echo $ciclave; ?>' target='inferior'>Cambiar Contraseña</a></li>
 								<li><a href='../controlador/ctr_usuario.php?salir=1'>Cerrar Sesion</a></li>
 							</ul>
 						</li>
