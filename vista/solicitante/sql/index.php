@@ -39,11 +39,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='sexo'>Sexo</label>
@@ -69,11 +69,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='telefono'>Telefono</label>
-							<input type='text' class='form-control' name='telefono' placeholder='...' value='' autocomplete='off' onkeypress='return soloNumeros(event)' onblur='limpia()' id='miInput' maxlength='12'>
+							<input type='text' class='form-control' name='telefono' placeholder='...' value='' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput' maxlength='12'>
 						</div>
 						<div class='form-group'>
 							<label for='correo'>Correo</label>
-							<input type='text' class='form-control' name='correo' placeholder='...' value='' autocomplete='off'  onblur='limpia()' id='miInput' maxlength='75'>
+							<input type='text' class='form-control' name='correo' placeholder='...' value='' autocomplete='off' id='miInput' maxlength='75'>
 						</div>
 					</div>
 
@@ -237,6 +237,11 @@ foreach($datosc as $c){
 				<i></i>
 				<span>Volver a la lista</span>
 			</a>
+
+			<a href="" class='btn btn-buscar'>
+				<i></i>
+				<span>Imprimir</span>
+			</a>
 			
 		</div>
 
@@ -326,7 +331,7 @@ foreach($datosc as $c){
 @$datosm = $_SESSION['mostrarper'];//arreglo que trae los datos de la tabla
 foreach($datosm as $d){
 	//se optiene el valor de cada campo de la tabla
-
+	@$id=$d['idsol'];
 	@$cedula=$d['cedulasol'];
 	@$nombre=$d['nombresol'];
 	@$apellido=$d['apellidosol'];
@@ -368,17 +373,20 @@ foreach($datosm as $d){
 			<div class='panel panel-bordered'>
 				<form name='formulario' class='formulario' onsubmit='return validarsolicitante(this)' method='post' action='../../../controlador/ctr_solicitante.php'>
 					<div class='panel-body'>
+						<div class='form-group' style='display: none;'>
+							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo "$id"; ?>' autocomplete='off' maxlength='11'>
+						</div>
 						<div class='form-group'>
 							<label for='cedula'>Cédula</label>
 							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo "$cedula"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' maxlength='10'>
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo "$apellido"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo "$apellido"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='sexo'>Sexo</label>
@@ -403,11 +411,11 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='telefono'>Telefono</label>
-							<input type='text' class='form-control' name='telefono' placeholder='...' value='<?php echo "$telefono"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' onblur='limpia()' id='miInput' maxlength='12'>
+							<input type='text' class='form-control' name='telefono' placeholder='...' value='<?php echo "$telefono"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput' maxlength='12'>
 						</div>
 						<div class='form-group'>
 							<label for='correo'>Correo</label>
-							<input type='text' class='form-control' name='correo' placeholder='...' value='<?php echo "$correo"; ?>' autocomplete='off'  onblur='limpia()' id='miInput' maxlength='75'>
+							<input type='text' class='form-control' name='correo' placeholder='...' value='<?php echo "$correo"; ?>' autocomplete='off'  id='miInput' maxlength='75'>
 						</div>
 					</div>
 
@@ -471,7 +479,7 @@ foreach($datosm as $d){
 											<td><?php echo $r->nombresol." ". $r->apellidosol; ?></td>
 											<td><?php echo $r->nombrecar;?></td>
 										<td>
-											<a onclick="javascript:return confirm('¿Seguro que quiere habilitar este registro?');" href="../../../controlador/ctr_solicitante.php?sql=h&ci=<?php echo $r->cedulasol; ?>" class='btn btn-add-new pull-right'>Habilitar</a>
+											<a onclick="javascript:return confirm('¿Seguro que quiere habilitar este registro?');" href="../../../controlador/ctr_solicitante.php?sql=h&id=<?php echo $r->idsol; ?>" class='btn btn-add-new pull-right'>Habilitar</a>
 										</td>
 									</tr>
 								<?php endforeach; 
@@ -500,8 +508,100 @@ foreach($datosm as $d){
 
 <?php 
 	}
-?>
-			</div>
+if($sql=='r'){
+
+	ini_set("memory_limit","124M");
+	set_time_limit(300);
+
+	require_once("../../assets/dompdf/dompdf_config.inc.php");
+
+	date_default_timezone_set('America/Caracas');
+
+	$fecha=date('Y-m-d');
+
+	$fecha_bd= $fecha;
+	$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+
+	$aristides='"Aristides Bastidas"';
+
+	$html =
+		"<!DOCTYPE html>
+		<html>
+		<head>
+			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes.css'>
+		</head>
+		<body>
+				<div class='contenedor'>
+					<h1 class='sicau-sg'>SICAU-SG</h1>
+					<span>Unidad Servicios Generales</span><br>
+					<span>Universidad Politecnica Territorial de Yaracuy ".$aristides."</span><br>
+					<span>Independencia, Yaracuy</span><br>
+					<span>Venezuela</span>
+					<img src='../../assets/img/uptyab.jpg' class='img'>
+				</div>
+					<h1 class='page-title'>
+						<i></i>
+						Reporte Solicitantes
+					</h1>
+				
+				<div class='contenedor'>
+					<div class='panel panel-bordered'>
+						<div class='panel-body'>
+							<div class='tabla'>
+								<table class='table table-hover' id='tabla'>
+									<thead>
+										<tr>
+											<th>Cedula</th>
+											<th>Nombre y Apellido</th>
+											<th>Sexo</th>
+											<th>Cargo</th>
+											<th>Telefono</th>
+											<th>Correo</th>
+										</tr>
+									</thead>
+									<tbody>";
+
+	@$datosrep = $_SESSION['reportarcat'];
+
+	foreach(@$datosrep as $r):
+	@$sexo=$r->sexo;
+	@$correo=$r->correo;
+	if($sexo=='m'){$sex='Masculino';}else{$sex='Femenino';}
+	if(empty($correo)){$correo='-';}
+	$html .= "
+		<tr>
+			<td style='color: #526069;'>".$r->cedulasol."</td>
+			<td style='color: #526069;'>".$r->nombresol." ".$r->apellidosol."</td>
+			<td style='color: #526069;'>".$sex."</td>
+			<td style='color: #526069;'>".$r->nombrecar."</td>
+			<td style='color: #526069;'>".$r->telefono."</td>";
+	if($correo=='-'){
+	$html .= "
+			<td style='color: #526069;' align='center'>".$correo."</td>
+		</tr>";
+	}else{
+	$html .= "
+			<td style='color: #526069;'>".$correo."</td>
+		</tr>";
+	}
+	endforeach;
+	$html .= "
+		</tbody></table>
+		</div></div>
+		</div></div>
+		<div class='footer'>
+			<span >PRIVADO Y CONFIDENCIAL</span>
+			<span class='sicau'>| SICAU-SG</span>
 		</div>
-	</body>
-</html>
+		<div class='pull-right'>
+			<span class='pull-right'>$fecha_nueva</span>
+		</div>
+		</body></html>";
+
+	$dompdf = new DOMPDF();
+	$dompdf->set_paper('a4', 'portrait'); 
+	$dompdf->load_html(utf8_decode($html));
+	$dompdf->render($html);
+	$dompdf->stream("SICAU-SOLICITANTES.pdf", array('Attachment'=>'0'));
+}
+?>

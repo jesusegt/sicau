@@ -19,7 +19,15 @@ session_start();
 			<h1 class='page-title'>
 				<i></i>
 				Asistencias
-			</h1>	
+			</h1>
+			<a href='../../controlador/ctr_asistencia.php?list=2' class='btn btn-delete'>
+				<i></i>
+				<span>Asistencias incompletas</span>
+			</a>
+			<a href='../../controlador/ctr_asistencia.php?sql=mr' class='btn btn_imprimir' style='margin-left: 3px;'>
+				<i></i>
+				<span>Reporte</span>
+			</a>	
 		</div>
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
@@ -34,8 +42,8 @@ session_start();
 									<th>Cédula</th>
 									<th>Nombre y Apellido</th>
 									<th>Fecha</th>
-									<th>Hora</th>
-									<th>Acción</th>
+									<th>Hora de Entrada</th>
+									<th>Hora de Salida</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -57,13 +65,18 @@ session_start();
 										</td>
 										<td>
 											<?php
-												$hora_bd = $r->hora;
+												$hora_bd = $r->horaen;
 												$hora_nueva = date ('h:i A', strtotime($hora_bd));
 												echo $hora_nueva;
 											?>
-												
 										</td>
-										<td><?php echo $r->accion;?></td>
+										<td>
+											<?php
+												$hora_bd2 = $r->horasa;
+												$hora_nueva2 = date ('h:i A', strtotime($hora_bd2));
+												echo $hora_nueva2;
+											?>
+										</td>
 									</tr>
 								<?php endforeach; 
 									}

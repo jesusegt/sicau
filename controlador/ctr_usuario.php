@@ -108,8 +108,8 @@
 	if(isset($_GET['sql']) && $_GET['sql']=="m")//verifica que se alla presionado el boton especifico
 		{
 		$sql="m";
-		$cedula = $_GET['ci'];
-		$datos = $usu->MostrarUsuario($cedula);//Invocamos al método para mostrar persona recibiendo la cedula
+		$id = $_GET['id'];
+		$datos = $usu->MostrarUsuario($id);//Invocamos al método para mostrar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 		}else{
@@ -124,20 +124,18 @@
 	/*### ACTUALIZAR ##############################################################*/
 	/*=============================================================================*/
 	if(isset($_POST['accion']) && $_POST['accion']=="Actualizar"){//verifica que se alla presionado el boton especifico
+		$id = $_POST['id'];
 		$cedula = $_POST['cedula'];
 		$nombre = $_POST['nombre'];
 		$apellido = $_POST['apellido'];
 		$tipo = $_POST['tipo'];
-		$nombre_usu = $_POST['nombre_usu'];
-		$contrasena = $_POST['contrasena'];
 
+		$usu->setCedula($_POST['cedula']);
 		$usu->setNombre($_POST['nombre']); //seteamos la nombre
-		$usu->setapellido($_POST['apellido']); //seteamos el apellido
+		$usu->setApellido($_POST['apellido']); //seteamos el apellido
 		$usu->setTipo($_POST['tipo']);
-		$usu->setNombre_usu($_POST['nombre_usu']);
-		$usu->setContrasena($_POST['contrasena']);
 
-		$datos = $usu->ActualizarUsuario($cedula,$nombre,$apellido,$tipo,$nombre_usu,$contrasena);//Invocamos al método de actualizar persona recibiendo la cedula
+		$datos = $usu->ActualizarUsuario($id,$cedula,$nombre,$apellido,$tipo);//Invocamos al método de actualizar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 			echo "<script>alert('No se pudo actualizar los datos')</script>";//Mensaje de Registro no válida

@@ -14,7 +14,6 @@ session_start();
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/newsolicitudes.css'>
-		<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 		<script language='javascript' src='../../assets/js/jquery-1.3.min.js'></script>
 		<script language='javascript'>
 			$(document).ready(function(){
@@ -43,7 +42,7 @@ session_start();
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
 
-				<form name='formulario' class='formulario' onsubmit='return validarsolicitud(this)' method='post' action='../../../controlador/ctr_solicitud.php'>
+				<form name='formulario' class='formulario' onsubmit='return validarsoli(this)' method='post' action='../../../controlador/ctr_solicitud.php'>
 
 
 					<div class='panel-body'>
@@ -53,11 +52,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='cedula'>Cédula</label>
-							<input type='text' class='form-control' name='cedula' placeholder='...' value='' autocomplete='off'>
+							<input type='text' class='form-control' name='cedula' placeholder='...' value='' autocomplete='off' maxlength='10' onkeypress='return soloNumeros(event)'>
 						</div>
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off' maxlength='100'>
 						</div>
 						<div class='form-group'>
 							<label for='id_tipo'>Tipo</label>
@@ -108,7 +107,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='comentario'>Comentario</label>
-							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4'></textarea>
+							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4' maxlength='200'></textarea>
 						</div>
 					</div>
 
@@ -121,6 +120,7 @@ session_start();
 				</form>
 			</div>
 		</div>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 <?php 
 	}if($sql=="c"){//si se trata de una consulta 
 

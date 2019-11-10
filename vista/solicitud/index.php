@@ -20,7 +20,7 @@ session_start();
 				<i></i>
 				Solicitudes 
 			</h1>
-			<a href='../../controlador/ctr_solicitud.php?list=2' class='btn btn-primary'>
+			<a href='../../controlador/ctr_solicitud.php?list=2' class='btn btn-add-new'>
 				<i></i>
 				<span>Solicitudes Completadas</span>
 			</a>

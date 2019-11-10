@@ -1,0 +1,124 @@
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: Open Sans,sans-serif;
+    font-size: 14px;
+    line-height: 1.57142857;
+    font-weight: 300;
+    color: #76838f;
+}
+
+.page-title {
+    display: inline-block;
+    font-size: 18px;
+    /*height: 80px;*/
+    padding-bottom: 10px;
+    line-height: 43px;
+    /*margin-top: 3px;*/
+    padding-top: 10px;
+    /*color: #555;*/
+    color: #3495df;
+    position: relative;
+    /*padding-left: 20px;*/
+    font-weight: 700;
+    margin-right: 20px;
+    margin-bottom: 0;}
+
+thead{
+	display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr{
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+th {
+    text-align: left;
+}
+
+
+.tabla{
+	overflow-x: auto;
+    min-height: .01%;
+
+}
+
+.table {
+    color: #76838f;
+    /*width: 100%;*/
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: grey;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+}
+
+.table>thead>tr>th {
+    border-color: #EAEAEA;
+    border-bottom: 1,5px solid #838383;
+    border-top: 1,5px solid #838383;
+    vertical-align: bottom;
+    font-weight: 400;
+    color: #526069;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.contenedor>span{
+	color: #727272;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.footer{
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+}
+
+.sicau{
+    color:#3495df;
+}
+
+.pull-right{
+    position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+    text-align: right !important;
+}
+
+.img{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 0;
+    top: 40;
+}
+
+.sicau-sg{
+    margin: 0;
+    margin-bottom: 10px;
+    color:#3495df;
+    letter-spacing: -2;
+}
+
+.full{
+    width: 100%;
+}

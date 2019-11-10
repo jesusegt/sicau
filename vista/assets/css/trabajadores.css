@@ -56,6 +56,11 @@ a{
     cursor: pointer;
 }
 
+.btn_imprimir{
+    background: #3a7fe8;
+    color: white;
+}
+
 .btn-add-new{
 	background: #42D07E;
     color: #fff;
@@ -121,6 +126,7 @@ a{
 	padding-top: 2px;
 	padding-right: 2px;
 	padding-left: 2px;
+    background: #c4c4c4;
 }
 
 .btn-buscar:hover{

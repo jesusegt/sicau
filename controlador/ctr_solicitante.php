@@ -101,8 +101,8 @@
 	if(isset($_GET['sql']) && $_GET['sql']=="c")//verifica que se alla presionado el boton especifico
 		{
 		$sql="c";
-		$cedula = $_GET['ci'];
-		$datos = $soli->ConsultarSolicitante($cedula);//Invocamos al método de consultar persona recibiendo la cedula
+		$id = $_GET['id'];
+		$datos = $soli->ConsultarSolicitante($id);//Invocamos al método de consultar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{ echo 'hola';
 		}else{
@@ -119,8 +119,8 @@
 	if(isset($_GET['sql']) && $_GET['sql']=="m")//verifica que se alla presionado el boton especifico
 		{
 		$sql="m";
-		$cedula = $_GET['ci'];
-		$datos = $soli->MostrarSolicitante($cedula);//Invocamos al método para mostrar persona recibiendo la cedula
+		$id = $_GET['id'];
+		$datos = $soli->MostrarSolicitante($id);//Invocamos al método para mostrar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 		}else{
@@ -135,6 +135,7 @@
 	/*### ACTUALIZAR ##############################################################*/
 	/*=============================================================================*/
 	if(isset($_POST['accion']) && $_POST['accion']=="Actualizar"){//verifica que se alla presionado el boton especifico
+		$id = $_POST['id'];
 		$cedula = $_POST['cedula'];
 		$nombre = $_POST['nombre'];
 		$apellido = $_POST['apellido'];
@@ -143,14 +144,15 @@
 		$telefono = $_POST['telefono'];
 		$correo = $_POST['correo'];
 
-		$soli->setNombre($_POST['nombre']); //seteamos la nombre
+		$soli->setCedula($_POST['cedula']); //seteamos la cedula
+		$soli->setNombre($_POST['nombre']); //seteamos el nombre
 		$soli->setapellido($_POST['apellido']); //seteamos el apellido
 		$soli->setSexo($_POST['sexo']);
 		$soli->setId_cargo($_POST['id_cargo']);
 		$soli->setTelefono($_POST['telefono']);
 		$soli->setCorreo($_POST['correo']);
 
-		$datos = $soli->ActualizarSolicitante($cedula,$nombre,$apellido,$sexo,$id_cargo,$telefono,$correo);//Invocamos al método de actualizar persona recibiendo la cedula
+		$datos = $soli->ActualizarSolicitante($id,$cedula,$nombre,$apellido,$sexo,$id_cargo,$telefono,$correo);//Invocamos al método de actualizar persona recibiendo la cedula
 	}
 
 	/*===========================================================================*/
@@ -158,8 +160,8 @@
 	/*===========================================================================*/
 	if(isset($_GET['sql']) && $_GET['sql']=="e"){//verifica que se alla presionado el boton especifico
 		$sql="e";
-		$cedula = $_GET['ci'];
-		$datos = $soli->EliminarSolicitante($cedula);//Invocamos al método para eliminar persona recibiendo la cedula
+		$id = $_GET['id'];
+		$datos = $soli->EliminarSolicitante($id);//Invocamos al método para eliminar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 		}else{
@@ -173,8 +175,8 @@
 	/*===========================================================================*/
 	if(isset($_GET['sql']) && $_GET['sql']=="h"){//verifica que se alla presionado el boton especifico
 		$sql="h";
-		$cedula = $_GET['ci'];
-		$datos = $soli->HabilitarSolicitante($cedula);//Invocamos al método para eliminar persona recibiendo la cedula
+		$id = $_GET['id'];
+		$datos = $soli->HabilitarSolicitante($id);//Invocamos al método para eliminar persona recibiendo la cedula
 		if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 		}else{
@@ -183,7 +185,22 @@
 		}
 	}
 	
+	/*==========================================================================*/
+	/*### PDF 01 ###############################################################*/
+	/*==========================================================================*/
+	if(isset($_GET['sql']) && $_GET['sql']=="r") //verifica que se alla presionado el boton especifico
+		{
+		$sql="r";
+		$datos = $soli->listarReporte();//Invocamos al método para mostrar persona recibiendo la cedula
+		if(empty($datos)) //Si el método, retorna un arreglo vacío
+		{
+		}else{
+			$_SESSION['sql'] = $sql;
+			$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+			header("Location: ../vista/solicitante/sql/");//mostrar el archivo con los datos	
 
+		}
+	}
 	
 
 ?>

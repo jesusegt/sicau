@@ -48,7 +48,7 @@ $cambio1=@$_SESSION['cambio'];
 						<li><a href='#'>Funciones</a>
 							<ul class='submenu'>
 								<li><a href='actividad/sql/index.php' target='inferior'>Actividad</a></li>
-								<li><a href='asistencia/sql/index.php' target='inferior'>Asistencia</a></li>
+								<li><a href='../controlador/ctr_asistencia.php?sql=a' target='inferior'>Asistencia</a></li>
 								<li><a href='../controlador/ctr_solicitud.php?sql=a' target='inferior'>Solicitud</a></li>
 							</ul>
 						</li>

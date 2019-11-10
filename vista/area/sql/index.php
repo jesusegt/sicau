@@ -34,7 +34,7 @@ session_start();
 					<div class='panel-body'>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off'  id='miInput'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off'  id='miInput' maxlength='25'>
 						</div>
 
 					<div class='panel-footer'>
@@ -129,13 +129,13 @@ foreach($datosm as $d){
 			<div class='panel panel-bordered'>
 				<form name='formulario' class='formulario' onsubmit='return validararea(this)' method='post' action='../../../controlador/ctr_area.php'>
 					<div class='panel-body'>
-						<div class='form-group'>
-							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo "$id"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' style='display: none;'>
+						<div class='form-group' style='display: none;'>
+							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo "$id"; ?>' autocomplete='off' id='miInput'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' id='miInput' maxlength='25'>
 						</div>
 
 					<div class='panel-footer'>
@@ -220,7 +220,84 @@ foreach($datosm as $d){
 <script type='text/javascript' src='../../assets/data/datatables.min.js'></script>
 <script type='text/javascript' src='../../assets/data/main.js'></script>
 
-<?php } ?>
+<?php 
+	}
+if($sql=='r'){
+
+	ini_set("memory_limit","124M");
+	set_time_limit(300);
+
+	require_once("../../assets/dompdf/dompdf_config.inc.php");
+
+	date_default_timezone_set('America/Caracas');
+
+	$fecha=date('Y-m-d');
+
+	$fecha_bd= $fecha;
+	$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+
+	$aristides='"Aristides Bastidas"';
+
+	$html =
+		"<!DOCTYPE html>
+		<html>
+		<head>
+			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes2.css'>
+		</head>
+		<body>
+				<div class='contenedor'>
+					<h1 class='sicau-sg'>SICAU-SG</h1>
+					<span>Unidad Servicios Generales</span><br>
+					<span>Universidad Politecnica Territorial de Yaracuy ".$aristides."</span><br>
+					<span>Independencia, Yaracuy</span><br>
+					<span>Venezuela</span>
+					<label class='imgg'><img src='../../assets/img/uptyab.jpg' class='img'></label>
+				</div>
+					<h1 class='page-title'>
+						<i></i>
+						Reporte Areas
+					</h1>
+				
+				<div class='contenedor'>
+					<div class='panel panel-bordered'>
+						<div class='panel-body'>
+							<div class='tabla'>
+								<table class='table table-hover full' id='tabla'>
+									<thead>
+										<tr>
+											<th>Nombre</th>
+										</tr>
+									</thead>
+									<tbody>";
+
+	@$datosrep = $_SESSION['reportarcat'];
+
+	foreach(@$datosrep as $r):
+	$html .= "
+		<tr>
+			<td style='color: #526069;'>".$r->nombre."</td>
+		</tr>";
+	endforeach;
+	$html .= "
+		</tbody></table>
+		</div></div>
+		</div></div>
+		<div class='footer'>
+			<span >PRIVADO Y CONFIDENCIAL</span>
+			<span class='sicau'>| SICAU-SG</span>
+		</div>
+		<div class='pull-right'>
+			<span class='pull-right'>$fecha_nueva</span>
+		</div>
+		</body></html>";
+
+	$dompdf = new DOMPDF();
+	$dompdf->set_paper('a4', 'portrait'); 
+	$dompdf->load_html(utf8_decode($html));
+	$dompdf->render($html);
+	$dompdf->stream("SICAU-AREAS.pdf", array('Attachment'=>'0'));
+}
+?>
 			</div>
 		</div>
 	</body>

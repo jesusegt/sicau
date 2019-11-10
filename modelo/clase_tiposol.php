@@ -129,7 +129,15 @@
 				}
 			}
 
+		/* LISTAR REPORTE */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
+				$sql = "SELECT * FROM tipo_solicitud WHERE estatus='a' ORDER BY nombre ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
 
 	} // CIERRE CLASE Tiposol
 

@@ -291,7 +291,24 @@
 				}
 			}
 
+		/* LISTAR REPORTE */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
+				$sql = "SELECT p.id AS idperm,
+								p.fecha_inicial AS fechaini,
+								p.fecha_final AS fechafin,
+								p.motivo AS motivo,
+								p.estatus AS estatusperm,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM sol_per AS sp INNER JOIN solicitante AS s 
+						ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE p.estatus='a'";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
 
 
 

@@ -142,4 +142,21 @@
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_area.php?list=2'>"; // ir a la pantalla de inicio
 		}
 	}
+
+	/*==========================================================================*/
+	/*### PDF 01 ###############################################################*/
+	/*==========================================================================*/
+	if(isset($_GET['sql']) && $_GET['sql']=="r") //verifica que se alla presionado el boton especifico
+		{
+		$sql="r";
+		$datos = $subar->listarReporte();//Invocamos al método para mostrar persona recibiendo la cedula
+		if(empty($datos)) //Si el método, retorna un arreglo vacío
+		{
+		}else{
+			$_SESSION['sql'] = $sql;
+			$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+			header("Location: ../vista/area/sql/");//mostrar el archivo con los datos	
+
+		}
+	}
 ?>

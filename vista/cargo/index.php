@@ -31,6 +31,10 @@ session_start();
 				
 			</a>
 			<?php } ?>
+			<a href='../../controlador/ctr_cargo.php?sql=r' class='btn btn_imprimir' target='blank' style='margin-left: 3px;'>
+				<i></i>
+				<span>Reporte</span>
+			</a>
 			
 		</div>
 		<div class='contenedor'>

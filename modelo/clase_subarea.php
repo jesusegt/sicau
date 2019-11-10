@@ -36,6 +36,7 @@
 				$result->execute();
 				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
+
 		/* CATALAGO INACTIVOS */
 			public function ListarInactivo(){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
@@ -146,7 +147,15 @@
 				}
 			}
 
+		/* CATALAGO */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
+				$sql = "SELECT s.id AS idsub, s.nombre AS nombresub, s.estatus AS estatussub, a.id AS idare, a.nombre AS nombreare, a.estatus AS estatusare  FROM subarea AS s INNER JOIN area AS a ON s.id_area=a.id WHERE s.estatus='a' ORDER BY a.nombre, s.nombre ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
 
 
 

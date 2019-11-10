@@ -4,7 +4,7 @@ session_start();
 	if(@$_GET['sql']){ @$sql = $_GET['sql']; }
 	if(@$_SESSION['sql']){ @$sql = $_SESSION['sql']; }
 
-	if($sql=="a"){  //si no existe datos registrado
+	if($sql=="a"){  // REGISTRAR USUARIO
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ session_start();
 
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
-				<form name='formulario' class='formulario' onsubmit='return usuario(this)' method='post' action='../../../controlador/ctr_usuario.php'>
+				<form name='formulario' class='formulario' onsubmit='return validarusuario(this)' method='post' action='../../../controlador/ctr_usuario.php'>
 					<div class='panel-body'>
 						<div class='form-group'>
 							<label for='cedula'>Cédula</label>
@@ -42,11 +42,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onblur='limpia()' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='tipo'>Tipo</label>
@@ -58,17 +58,17 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre_usu'>Usuario</label>
-							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='' autocomplete='off' id='miInput'>
+							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='' autocomplete='off' id='miInput' maxlength='25'>
 						</div>
 						<div class='form-group'>
 							<label for='contrasena'>Contraseña</label> 
 							<i class='far fa-eye-slash ojo' style='width: 20px;'></i>
-							<input type='password' class='form-control' name='contrasena' id='contrasena' placeholder='...' autocomplete='off' maxlength='30' value=''>
+							<input type='password' class='form-control' name='contrasena' id='contrasena' placeholder='...' autocomplete='off' maxlength='32' value=''>
 						</div>
 						<div class='form-group'>
 							<label for='pw'>Confirmar Contraseña</label> 
 							<i class='far fa-eye-slash ojo2' style='width: 20px;'></i>
-							<input type='password' class='form-control' name='pw' id='pw' placeholder='...' autocomplete='off' maxlength='30' value=''>
+							<input type='password' class='form-control' name='pw' id='pw' placeholder='...' autocomplete='off' maxlength='32' value=''>
 						</div>
 					</div>
 
@@ -78,7 +78,8 @@ session_start();
 				</form>
 <script type='text/javascript' src='../../assets/js/jquery.min.js'></script>
 <script type='text/javascript' src='../../assets/js/usuario.js'></script>
-<script type='text/javascript' src='../../assets/js/all.js'></script>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+<script type='text/javascript' src='../../assets/js/all.min.js'></script>
 
 
 
@@ -172,7 +173,7 @@ foreach($datosc as $b){
 				<?php } ?>
 <?php 
 	}
-	if($sql=="c"){//si se trata de una consulta 
+	if($sql=="c"){// CONSULTAR USUARIO
 
 @$datosc = $_SESSION['selectci'];//arreglo que trae los datos de la tabla
 foreach($datosc as $c){
@@ -257,10 +258,11 @@ foreach($datosc as $c){
 				<?php } ?>
 <?php 
 	}
-	if($sql=="m"){ //si se trata de actualizar
+	if($sql=="m"){ // EDITAR USUARIO
 @$datosm = $_SESSION['mostrarper'];//arreglo que trae los datos de la tabla
 foreach($datosm as $d){
 	//se optiene el valor de cada campo de la tabla
+	@$id=$d['id'];
 	@$cedula=$d['cedula'];
 	@$nombre=$d['nombre'];
 	@$apellido=$d['apellido'];
@@ -276,7 +278,7 @@ foreach($datosm as $d){
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
-		<script type='text/javascript' src='../../assets/js/usuario.js'></script>
+		
 	</head>
 	<body>
 
@@ -293,23 +295,27 @@ foreach($datosm as $d){
 
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
-				<form name='formulario' class='formulario' onsubmit='return usuario(this)' method='post' action='../../../controlador/ctr_usuario.php'>
+				<form name='formulario' class='formulario' onsubmit='return editarusuario(this)' method='post' action='../../../controlador/ctr_usuario.php'>
 					<div class='panel-body'>
-					<div class='form-group'>
+						<div class='form-group'>
+							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo $id; ?>' autocomplete='off' onkeypress='return soloNumeros(event)'
+							id='miInput' maxlength='11'>
+						</div>
+						<div class='form-group'>
 							<label for='cedula'>Cédula</label>
 							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo $cedula; ?>' autocomplete='off' onkeypress='return soloNumeros(event)'
-							id='miInput' onfocus='this.blur()'>
+							id='miInput' maxlength='10'>
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
 							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
-							id='miInput' onfocus='this.blur()'>
+							id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
 							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
-							id='miInput' onfocus='this.blur()'>
-						</div>
+							id='miInput' maxlength='50'>
+						</div> 
 						<div class='form-group'>
 							<label for='tipo'>Tipo</label>
 							<select class='form-control' name='tipo' id='tipo'>
@@ -324,9 +330,11 @@ foreach($datosm as $d){
 						<input type='submit' class='btn btn-primary' name='accion' value='Actualizar'>
 					</div>
 				</form>
+<script type='text/javascript' src='../../assets/js/usuario.js'></script>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 <?php 
 	}
-	if($sql=="v"){//si se trata de una consulta 
+	if($sql=="v"){// VER PERFIL USUARIO
 
 @$datosv = $_SESSION['selectci'];//arreglo que trae los datos de la tabla
 foreach($datosv as $v){
@@ -344,7 +352,6 @@ foreach($datosv as $v){
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/newsolicitudes.css'>
-		<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 	</head>
 	<body>
 
@@ -406,7 +413,7 @@ foreach($datosv as $v){
 					</div>
 <?php 
 	}
-	if($sql=="p"){ //si se trata de actualizar
+	if($sql=="p"){ // EDITAR PERFIL DE USUARIO
 @$datosp = $_SESSION['mostrarper'];//arreglo que trae los datos de la tabla
 foreach($datosp as $p){
 	//se optiene el valor de cada campo de la tabla
@@ -423,7 +430,8 @@ foreach($datosp as $p){
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
-		<script type='text/javascript' src='../../assets/js/formulario.js'></script>
+		<script type='text/javascript' src='../../assets/js/usuario.js'></script>
+		<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 	</head>
 	<body>
 
@@ -440,27 +448,28 @@ foreach($datosp as $p){
 
 		<div class='contenedor'>
 			<div class='panel panel-bordered'>
-				<form name='formulario' class='formulario' onsubmit='return validarusuario(this)' method='post' action='../../../controlador/ctr_usuario.php'>
+				<form name='formulario' class='formulario' onsubmit='return editarperfil(this)' method='post' action='../../../controlador/ctr_usuario.php'>
 					<div class='panel-body'>
 						<div class='form-group' style='display: none;'>
 							<label for='cedula'>Cédula</label>
 							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo $cedula; ?>' autocomplete='off' onkeypress='return soloNumeros(event)'
-							id='miInput' style=''>
+							id='miInput' maxlength='10'>
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
 							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
-							id='miInput'>
+							id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
 							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
-							id='miInput'>
+							id='miInput' maxlength='50'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre_usu'>Usuario</label>
-							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='<?php echo $nombre_usu; ?>' autocomplete='off' id='miInput'>
+							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='<?php echo $nombre_usu; ?>' autocomplete='off' id='miInput' 
+							maxlength='25'>
 						</div>
 					</div>
 
@@ -470,59 +479,7 @@ foreach($datosp as $p){
 				</form>								
 <?php 
 	}
-	if($sql=="k"){ //si se trata de actualizar
-@$datosk = $_SESSION['mostrarper'];//arreglo que trae los datos de la tabla
-foreach($datosk as $k){
-	//se optiene el valor de cada campo de la tabla
-	@$cedula=$k['cedula'];
-	@$nombre=$k['nombre'];
-	@$apellido=$k['apellido'];
-	@$tipo=$k['tipo'];
-	@$nombre_usu=$k['nombre_usu'];
-	@$contrasena=$k['contrasena'];
-}
-?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset='utf-8'>
-		<title>SICAU-SG</title>
-		<link rel='stylesheet' type='text/css' href='../../assets/css/newsolicitudes.css'>
-		<script type='text/javascript' src='../../assets/js/contrasena.js'></script>
-	</head>
-	<body>
-
-		<div class='contenedor'>
-			<h1 class='page-title'>
-				<i></i>
-				Cambiar Contraseña
-			</h1>
-			
-		</div>
-
-		<div class='contenedor'>
-			<div class='panel panel-bordered'>
-
-				<form name='formulario' class='formulario' onsubmit='return validarcontrasena(this)' method='post' action='../../../controlador/ctr_usuario.php'>
-					<div class='panel-body'>
-						<div class='form-group'>
-							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo"$cedula"; ?>' autocomplete='off'  maxlength='10' style='display: none;'>
-						</div>
-						<div class='form-group'>
-							<label for='contrasena'>Contraseña Actual</label>
-							<input type='password' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off'>
-						</div>
-					</div>
-
-					<div class='panel-footer'>
-						<input type='reset' class='btn btn-delete' name='cancelar' value='Limpiar'>
-						<input type='submit' class='btn btn-primary save' name='pw' value='Verificar'>
-					</div>
-				</form>
-<?php 
-	}
-	if($sql=="o"){ //si se trata de actualizar
+	if($sql=="o"){ // CAMBIAR CONTRASEÑA
 @$datoso = $_SESSION['mostrarper'];//arreglo que trae los datos de la tabla
 foreach($datoso as $o){
 	//se optiene el valor de cada campo de la tabla
@@ -539,7 +496,7 @@ foreach($datoso as $o){
 		<link rel='stylesheet' type='text/css' href='../../assets/css/newsolicitudes.css'>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/all.min.css'>
-		
+
 	</head>
 	<body>
 
@@ -562,17 +519,20 @@ foreach($datoso as $o){
 						<div class='form-group'>
 							<label for='contrasena_actual'>Contraseña Actual</label>
 							<i class='far fa-eye-slash ojo3' style='width: 20px;'></i>
-							<input type='password' class='form-control' name='contrasena_actual' placeholder='...' value='' autocomplete='off' id='contrasena_actual'>
+							<input type='password' class='form-control' name='contrasena_actual' placeholder='...' value='' autocomplete='off' id='contrasena_actual'
+							maxlength='32'>
 						</div>
 						<div class='form-group'>
 							<label for='contrasena'>Nueva Contraseña</label>
 							<i class='far fa-eye-slash ojo' style='width: 20px;'></i>
-							<input type='password' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off' id='contrasena'>
+							<input type='password' class='form-control' name='contrasena' placeholder='...' value='' autocomplete='off' id='contrasena'
+							maxlength='32'>
 						</div>
 						<div class='form-group'>
-							<label for='pw'>Confirmar Contraseña</label>
-							<i class='far fa-eye-slash ojo2' style='width: 20px;'></i>
-							<input type='password' class='form-control' name='pw' placeholder='...' value='' autocomplete='off' id='pw'>
+							<label for='pwc'>Confirmar Contraseña</label>
+							<i class='far fa-eye-slash ojo4' style='width: 20px;'></i>
+							<input type='password' class='form-control' name='pwc' placeholder='...' value='' autocomplete='off' id='pwc'
+							maxlength='32'>
 						</div>
 					</div>
 
@@ -583,7 +543,8 @@ foreach($datoso as $o){
 				</form>
 <script type='text/javascript' src='../../assets/js/jquery.min.js'></script>
 <script type='text/javascript' src='../../assets/js/usuario.js'></script>
-<script type='text/javascript' src='../../assets/js/all.js'></script>
+<script type='text/javascript' src='../../assets/js/all.min.js'></script>
+
 <?php 
 	}
 	if($sql=='i'){

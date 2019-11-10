@@ -60,10 +60,10 @@ FOREIGN KEY (id_cargo) REFERENCES cargo(id)
 
 CREATE TABLE solicitante_correo (
 id int(11) AUTO_INCREMENT,
-cedula_sol varchar(10) NOT NULL,
 correo varchar(75) NOT NULL,
+id_sol int NOT NULL,
 PRIMARY KEY (id),
-FOREIGN KEY (cedula_sol) REFERENCES solicitante(cedula)
+FOREIGN KEY (id_sol) REFERENCES solicitante(id)
 )ENGINE=InnoDB;
 
 CREATE TABLE permiso (
@@ -179,20 +179,60 @@ FOREIGN KEY (id_per) REFERENCES permiso(id)
 
 
 INSERT INTO `usuario`(`id`, `cedula`, `nombre`, `apellido`, `tipo`, `nombre_usu`, `contrasena`, `estatus`) 
-VALUES ('1','12345678','admin','admin','adm','admin','123','a');
+VALUES ('1','12345678','super','usuario','adm','admin','123','a');
 
-INSERT INTO `cargo` (`id`, `nombre`, `estatus`) 
-VALUES (NULL, 'Obrero', 'a');
+INSERT INTO `cargo` (`id`, `nombre`, `estatus`) VALUES ('1', 'Obrero', 'a');
+INSERT INTO `cargo` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Estudiante', 'a');
+INSERT INTO `cargo` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Administrativo', 'a');
 
 INSERT INTO `solicitante` (`id`, `cedula`, `nombre`, `apellido`, `sexo`, `telefono`, `estatus`, `id_cargo`) 
 VALUES (NULL, '27529516', 'Jesus', 'Gonzalez', 'm', '0412-1527833', 'a', '1');
-
 INSERT INTO `solicitante` (`id`, `cedula`, `nombre`, `apellido`, `sexo`, `telefono`, `estatus`, `id_cargo`) 
 VALUES (NULL, '27166703', 'Heleana', 'Hammad', 'f', '0414-5224172', 'a', '1');
+INSERT INTO `solicitante` (`id`, `cedula`, `nombre`, `apellido`, `sexo`, `telefono`, `estatus`, `id_cargo`) 
+VALUES (NULL, '27321765', 'Eliezer', 'Sanchez', 'm', '0426-3418993', 'a', '1');
 
-INSERT INTO `solicitante_correo` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27529516', 'jegt18@gmail.com');
+INSERT INTO `solicitante_correo` (`id`, `id_sol`, `correo`) VALUES (NULL, '1', 'jegt18@gmail.com');
+INSERT INTO `solicitante_correo` (`id`, `id_sol`, `correo`) VALUES (NULL, '2', 'heleanakh01@gmail.com');
+INSERT INTO `solicitante_correo` (`id`, `id_sol`, `correo`) VALUES (NULL, '3', 'eliezersanchez@gmail.com');
 
-INSERT INTO `solicitante_correo` (`id`, `cedula_sol`, `correo`) VALUES (NULL, '27166703', 'heleanakh01@gmail.com');
+INSERT INTO `area` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Aula', 'a');
+INSERT INTO `area` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Area Verde', 'a');
+INSERT INTO `area` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Pasillo', 'a');
+INSERT INTO `area` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Departamento', 'a');
+
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '1', 'E-08', 'a');
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '1', 'A-03', 'a');
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '1', 'E-05', 'a');
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '2', 'A', 'a');
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '3', 'Principal', 'a');
+INSERT INTO `subarea` (`id`, `id_area`, `nombre`, `estatus`) VALUES (NULL, '4', 'InformÃ¡tica', 'a');
+
+INSERT INTO `dia_feriado` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'Muerte de Simon Bolivar', '2018-12-17', '2018-12-17', 'a');
+INSERT INTO `dia_feriado` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'Nacimiento de Simon Bolivar', '2018-07-24', '2018-07-24', 'a');
+INSERT INTO `dia_feriado` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'Dia de la Independencia', '2018-04-19', '2018-04-19', 'a');
+INSERT INTO `dia_feriado` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'CumpleaÃ±os de Jesus', '2018-03-18', '2018-03-18', 'a');
+
+INSERT INTO `permiso` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'Viaje', '2018-04-10', '2018-04-12', 'a');
+INSERT INTO `permiso` (`id`, `motivo`, `fecha_inicial`, `fecha_final`, `estatus`) VALUES (NULL, 'Reposo por fiebre', '2018-03-18', '2018-03-25', 'a');
+
+INSERT INTO `sol_per` (`id`, `id_sol`, `id_per`) VALUES (NULL, '1', '1');
+INSERT INTO `sol_per` (`id`, `id_sol`, `id_per`) VALUES (NULL, '2', '2');
+
+INSERT INTO `tipo_solicitud` (`id`, `nombre`, `estatus`) VALUES (NULL, 'PlomerÃ­a', 'a');
+INSERT INTO `tipo_solicitud` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Electricidad', 'a');
+INSERT INTO `tipo_solicitud` (`id`, `nombre`, `estatus`) VALUES (NULL, 'Ambiente', 'a');
+
+
+
+
+
+
+
+
+
+
+
 
 
 

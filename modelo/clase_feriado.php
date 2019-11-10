@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 	class Feriado
 	{
 		//variables
@@ -97,7 +97,7 @@
 			public function ActualizarFeriado($id, $motivo, $fecha_inicial, $fecha_final){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-				$sql = "UPDATE dia_feriado SET motivo=>'$motivo', fecha_inicial=>'$fecha_inicial', fecha_final=>'$fecha_final' WHERE id=:id";//sentencia sql para actualizar
+				$sql = "UPDATE dia_feriado SET motivo='$motivo', fecha_inicial='$fecha_inicial', fecha_final='$fecha_final' WHERE id=:id";//sentencia sql para actualizar
 				$result = $con->prepare($sql);//preparar la sentencia sql
 				$params = array ('id'=>$id);
 				$cambio = $result->execute($params);//ejecuta la sentencia sql
@@ -148,7 +148,15 @@
 				}
 			}
 
+		/* CATALAGO */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
+				$sql = "SELECT * FROM dia_feriado WHERE estatus='a' ";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
 
 
 

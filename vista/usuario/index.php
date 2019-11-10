@@ -69,7 +69,7 @@ session_start();
 											<td>
 
 											<a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="../../controlador/ctr_usuario.php?sql=e&ci=<?php echo $r->cedula; ?>" class='btn btn-delete pull-right'>Eliminar</a>
-											<a href="../../controlador/ctr_usuario.php?sql=m&ci=<?php echo $r->cedula; ?>" class='btn btn-primary pull-right'>Editar</a>
+											<a href="../../controlador/ctr_usuario.php?sql=m&id=<?php echo $r->id; ?>" class='btn btn-primary pull-right'>Editar</a>
 											</td>
 										</tr>
 									<?php endforeach; 

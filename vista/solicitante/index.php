@@ -28,7 +28,11 @@ session_start();
 					<i></i>
 					<span>Inactivos</span>
 				</a>
-				<?php } ?>	
+				<?php } ?>
+				<a href='../../controlador/ctr_solicitante.php?sql=r' class='btn btn_imprimir' target='blank' style='margin-left: 3px;'>
+					<i></i>
+					<span>Reporte</span>
+				</a>	
 			</div>
 			<div class='contenedor'>
 				<div class='panel panel-bordered'>
@@ -58,9 +62,9 @@ session_start();
 											<td><?php echo $r->nombresol." ". $r->apellidosol; ?></td>
 											<td><?php echo $r->nombrecar;?></td>
 											<td>
-											<a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="../../controlador/ctr_solicitante.php?sql=e&ci=<?php echo $r->cedulasol; ?>" class='btn btn-delete pull-right'>Eliminar</a>
-											<a href="../../controlador/ctr_solicitante.php?sql=c&ci=<?php echo $r->cedulasol; ?>" class='btn btn-warning pull-right'>Ver</a>
-											<a href="../../controlador/ctr_solicitante.php?sql=m&ci=<?php echo $r->cedulasol; ?>" class='btn btn-primary pull-right' style='margin-right:3px;'>Editar</a>
+											<a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="../../controlador/ctr_solicitante.php?sql=e&id=<?php echo $r->idsol; ?>" class='btn btn-delete pull-right'>Eliminar</a>
+											<a href="../../controlador/ctr_solicitante.php?sql=c&id=<?php echo $r->idsol; ?>" class='btn btn-warning pull-right'>Ver</a>
+											<a href="../../controlador/ctr_solicitante.php?sql=m&id=<?php echo $r->idsol; ?>" class='btn btn-primary pull-right' style='margin-right:3px;'>Editar</a>
 											</td>
 										</tr>
 									<?php endforeach; 

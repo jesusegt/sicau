@@ -30,6 +30,10 @@ session_start();
 				<span>Inactivos</span>
 			</a>
 			<?php } ?>
+			<a href='../../controlador/ctr_subarea.php?sql=r' class='btn btn_imprimir' target='blank' style='margin-left: 3px;'>
+				<i></i>
+				<span>Reporte</span>
+			</a>	
 			
 		</div>
 		<div class='contenedor'>

@@ -34,11 +34,11 @@ session_start();
 					<div class='panel-body'>
 						<div class='form-group'>
 							<label for='cedula'>Cédula</label>
-							<input type='text' class='form-control' name='cedula' placeholder='...' value='' autocomplete='off'  id='miInput'>
+							<input type='text' class='form-control' name='cedula' placeholder='...' value='' autocomplete='off'  id='miInput' onkeypress='return soloNumeros(event)' maxlength='10'>
 						</div>
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'  id='miInput'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'  id='miInput' maxlength='25'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_inicial'>Fecha Inicial</label>
@@ -191,27 +191,27 @@ foreach($datosm as $d){
 				<form name='formulario' class='formulario' onsubmit='return validarpermiso(this)' method='post' action='../../../controlador/ctr_permiso.php'>
 					<div class='panel-body'>
 						<div class='form-group'>
-							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo "$id"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' style='display: none;'>
+							<input type='text' class='form-control' name='id' placeholder='...' value='<?php echo "$id"; ?>' autocomplete='off' id='miInput' style='display: none;'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre'>Cédula</label>
-							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo "$cedula"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput'>
+							<input type='text' class='form-control' name='cedula' placeholder='...' value='<?php echo "$cedula"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput' maxlength='10'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off' id='miInput' maxlength='25'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre'>Fecha Inicial</label>
-							<input type='date' class='form-control' name='fecha_inicial' placeholder='...' value='<?php echo "$fecha_inicial"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput'>
+							<input type='date' class='form-control' name='fecha_inicial' placeholder='...' value='<?php echo "$fecha_inicial"; ?>' autocomplete='off' id='miInput'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre'>Fecha Final</label>
-							<input type='date' class='form-control' name='fecha_final' placeholder='...' value='<?php echo "$fecha_final"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput'>
+							<input type='date' class='form-control' name='fecha_final' placeholder='...' value='<?php echo "$fecha_final"; ?>' autocomplete='off' id='miInput'>
 						</div>
 
 					<div class='panel-footer'>
@@ -314,7 +314,99 @@ foreach($datosm as $d){
 <script type='text/javascript' src='../../assets/data/datatables.min.js'></script>
 <script type='text/javascript' src='../../assets/data/main.js'></script>
 
-<?php } ?>
+<?php 
+	}
+if($sql=='r'){
+
+	ini_set("memory_limit","124M");
+	set_time_limit(300);
+
+	require_once("../../assets/dompdf/dompdf_config.inc.php");
+
+	date_default_timezone_set('America/Caracas');
+
+	$fecha=date('Y-m-d');
+
+	$fecha_bd= $fecha;
+	$fecha_nueva = date('d-m-Y', strtotime($fecha_bd));
+
+	$aristides='"Aristides Bastidas"';
+
+	$html =
+		"<!DOCTYPE html>
+		<html>
+		<head>
+			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes2.css'>
+		</head>
+		<body>
+				<div class='contenedor'>
+					<h1 class='sicau-sg'>SICAU-SG</h1>
+					<span>Unidad Servicios Generales</span><br>
+					<span>Universidad Politecnica Territorial de Yaracuy ".$aristides."</span><br>
+					<span>Independencia, Yaracuy</span><br>
+					<span>Venezuela</span>
+					<label class='imgg'><img src='../../assets/img/uptyab.jpg' class='img'></label>
+				</div>
+					<h1 class='page-title'>
+						<i></i>
+						Reporte Permisos
+					</h1>
+				
+				<div class='contenedor'>
+					<div class='panel panel-bordered'>
+						<div class='panel-body'>
+							<div class='tabla'>
+								<table class='table table-hover full' id='tabla'>
+									<thead>
+										<tr>
+											<th>Cédula</th>
+											<th>Nombre y Apellido</th>
+											<th>Motivo</th>
+											<th>Fecha Inicial</th>
+											<th>Fecha Final</th>	
+										</tr>
+									</thead>
+									<tbody>";
+
+	@$datosrep = $_SESSION['reportarcat'];
+
+	foreach(@$datosrep as $r):
+
+		$fecha_bd1= $r->fechaini;
+		$fecha_inicial1 = date('d-m-Y', strtotime($fecha_bd1));
+
+		$fecha_bd2= $r->fechafin;
+		$fecha_final1 = date('d-m-Y', strtotime($fecha_bd2));
+
+	$html .= "
+		<tr>
+			<td style='color: #526069;'>".$r->cedulasol."</td>
+			<td style='color: #526069;'>".$r->nombresol." ".$r->apellidosol."</td>
+			<td style='color: #526069;'>".$r->motivo."</td>
+			<td style='color: #526069;'>".$fecha_inicial1."</td>
+			<td style='color: #526069;'>".$fecha_final1."</td>
+		</tr>";
+	endforeach;
+	$html .= "
+		</tbody></table>
+		</div></div>
+		</div></div>
+		<div class='footer'>
+			<span >PRIVADO Y CONFIDENCIAL</span>
+			<span class='sicau'>| SICAU-SG</span>
+		</div>
+		<div class='pull-right'>
+			<span class='pull-right'>$fecha_nueva</span>
+		</div>
+		</body></html>";
+
+	$dompdf = new DOMPDF();
+	$dompdf->set_paper('a4', 'portrait'); 
+	$dompdf->load_html(utf8_decode($html));
+	$dompdf->render($html);
+	$dompdf->stream("SICAU-PERMISOS.pdf", array('Attachment'=>'0'));
+}
+?>
 			</div>
 		</div>
 	</body>

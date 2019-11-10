@@ -118,98 +118,86 @@ function validararea (f){
 	}
 }
 
-function validarsubarea (f){
-	var area = document.getElementById('area');
-	var subarea = f.subarea.value;
+function validarsub(f){
 
-	if (area.selectedIndex==false){
+	var area = document.getElementById('area');
+	var subarea = f.nombre.value;
+
+	if (area.selectedIndex==false) {
 		alert('Debe seleccionar un Area.');
 		f.area.focus();
 		return (false);
 	}
 
-	if(!subarea){
-		alert('Ingrese un Subarea.');
-		f.subarea.focus();
-		return false;
+	if(!subarea) {
+		alert ('Ingrese un Subarea.');
+		f.nombre.focus();
+		return (false);
 	}
 
 }
 
-function usuario(f){
+function validarferiado(f){
 
-				var ci = f.cedula.value;
-				var nombre = f.nombre.value;
-				var apellido = f.apellido.value;
-				var nombre_usu = f.nombre_usu.value;
-				var contrasena = f.contrasena.value;
-				var pw = f.pw.value;
+	var motivo = f.motivo.value;
+	var fechai = f.fecha_inicial.value;
+	var fechaf = f.fecha_final.value;
 
-				if(!ci){
-					alert('Ingrese una cédula.');
-					f.cedula.focus();
-					return false;
-				}
-				if (ci.length < 6) {
-					alert('Faltan digitos a la Cédula');
-					f.cedula.focus();
-					return false;
-			    }
+	if (!motivo){
+		alert ('Ingrese un motivo.');
+		f.motivo.focus();
+		return (false);
+	}
 
-				if(!nombre){
-					alert('Ingrese un Nombre.');
-					f.nombre.focus();
-					return false;
-				}
-				if (nombre.length < 3) {
-					alert('Nombre muy corto');
-					f.nombre.focus();
-					return false;
-			    }
+	if (!fechai){
+		alert ('Seleccione una fecha inicial');
+		f.fecha_inicial.focus();
+		return (false);
+	}
 
+	if (!fechaf){
+		alert ('Seleccione una fecha final');
+		f.fecha_final.focus();
+		return (false);
+	}
+}
 
-				if(!apellido){
-					alert('Ingrese un Apellido.');
-					f.apellido.focus();
-					return false;
-				}
-				if (apellido.length < 3) {
-					alert('Apellido muy corto');
-					f.apellido.focus();
-					return false;
-			    }
+function validarpermiso(f){
 
+	var ci = f.cedula.value;
+	var motivo = f.motivo.value;
+	var fechai = f.fecha_inicial.value;
+	var fechaf = f.fecha_final.value;
 
-				if(!tipo){
-					alert('Ingrese un Tipo.');
-					f.tipo.focus();
-					return false;
-				}
+	if(!ci){
+		alert('Ingrese una Cédula.');
+		f.cedula.focus();
+		return false;
+	}
+	if (ci.length < 6) {
+		alert('Faltan digitos a la Cédula.');
+		f.cedula.focus();
+		return false;
+    }
 
-				if(!usuario){
-					alert('Ingrese un Usuario.');
-					f.usuario.focus();
-					return false;
-				}
+	if (!motivo){
+		alert ('Ingrese un motivo.');
+		f.motivo.focus();
+		return (false);
+	}
 
-				if(!contrasena){
-					alert('Ingrese una Contraseña.');
-					f.pw.focus();
-					return false;
-				}
-				if(!pw){
-					alert('Debe confirmar la Contraseña.');
-					f.pw.focus();
-					return false;
-				}
-				if(contrasena != pw){
-				alert ('Las contraseñas no coinciden.');
-				f.contrasena.focus();
-				 return false;
-				       
-				}
+	if (!fechai){
+		alert ('Seleccione una fecha inicial');
+		f.fecha_inicial.focus();
+		return (false);
+	}
 
-			}
+	if (!fechaf){
+		alert ('Seleccione una fecha final');
+		f.fecha_final.focus();
+		return (false);
+	}
+}
 
 function validartiposol(f){
 	var name = f.nombre.value;
@@ -217,170 +205,96 @@ function validartiposol(f){
 	if(!name){
 		alert('Ingrese un Nombre para el Tipo de Solicitud.');
 		f.nombre.focus();
-		return false;
+		return (false);
 	}
 	if(name.length < 4){
 		alert('Nombre del Tipo de Solicitud muy corto.');
 		f.nombre.focus();
-		return false;
+		return (false);
 	}
 }
 
 
 
-function validarsolicitud(f){
+function validarsoli(f){
 	var ci = f.cedula.value;
-	var name = f.nombre.value;
-	var apellido = f.apellido.value;
-	var motivo = f.motivo.value;
-	var lugar = f.lugar.value;
-	var tipo = document.getElementById('tipo');
+	var motivo = f.motivo.value; 
+	var tipo = document.getElementById('id_tipo');
+	var area = document.getElementById('area');
+	var subarea = document.getElementById('id_subarea');
 
 	if(!ci){
 		alert('Ingrese una cédula.');
 		f.cedula.focus();
-		return false;
+		return (false);
 	}
 
 	if (ci.length < 6) {
 		alert('Faltan digitos a la Cédula');
 		f.cedula.focus();
-		return false;
+		return (false);
     }
-
-
-    if(!name){
-		alert('Ingrese un Nombre.');
-		f.nombre.focus();
-		return false;
-	}
-
-
-	if(!apellido){
-		alert('Ingrese un Apellido.');
-		f.apellido.focus();
-		return false;
-	}
 
 	if(!motivo){
 		alert('Ingrese un Motivo.');
 		f.motivo.focus();
-		return false;
-	}
-
-	if (tipo.selectedIndex==false){
-		alert('Debe seleccionar un Tipo');
-		f.tipo.focus();
 		return (false);
 	}
 
-	if(!lugar){
-		alert('Ingrese un Lugar.');
-		f.lugar.focus();
-		return false;
+	if (tipo.selectedIndex==false){
+		alert('Debe seleccionar un Tipo.');
+		f.id_tipo.focus();
+		return (false);
 	}
 
-	alert ('Solicitud Registrada.');
-	return 0;
+	if (area.selectedIndex==false){
+		alert('Debe seleccionar un Area.');
+		f.area.focus();
+		return (false);
+	}
+
+	if (subarea.selectedIndex==false){
+		alert('Debe seleccionar un Subarea.');
+		f.id_subarea.focus();
+		return (false);
+	}
 
 }
 
-function validarpw1(f){
+function validarasistencia(f) {
+	
+	var ci = f.cedula.value;
 
-			var contrasena = f.contrasena.value;
-	        
-	        if(!contrasena){
-	                alert('Ingrese la contraseña actual');
-	                f.contrasena.focus();
-	                return false;
-	        }
-}
-function validarpw(f){
-
-			var contrasena = f.contrasena.value;
-			var pwc = f.pwc.value;
-	        
-	        if(!contrasena){
-	                alert('Ingrese la nueva contraseña');
-	                f.contrasena.focus();
-	                return false;
-	        }
-
-	        
-	        if(!pwc){
-	                alert('Debe confirmar la nueva contraseña');
-	                f.pwc.focus();
-	                return false;
-	        }
-	        
-	        
-	        if(contrasena != pwc){
-	                alert ('Las nuevas contraseñas no coinciden');
-	                f.contrasena.focus();
-	                return false;
-	       
-	        }
-}
-
-
-function validarperfil (f){
-	var name = f.nombre.value;
-	var apellido = f.apellido.value;
-
-
-    if(!name){
-		alert('Ingrese un Nombre.');
-		f.nombre.focus();
-		return false;
-	}
-	if(name.length < 3){
-		alert('Nombre muy corto.');
-		f.nombre.focus();
-		return false;
+	if (!ci){
+		alert ('Ingrese una cédula.');
+		f.cedula.focus();
+		return (false);
 	}
 
-
-	if(!apellido){
-		alert('Ingrese un Apellido.');
-		f.apellido.focus();
-		return false;
-	}
-	if(apellido.length < 4){
-		alert('Apellido muy corto.');
-		f.apellido.focus();
-		return false;
+	if (cedula.length < 6){
+		alert ('Faltan digitos a la cédula.');
+		f.cedula.focus();
+		return (false);
 	}
 }
 
-function validarbuscar(f){
+function validaractividad (f){
 
 	var ci = f.cedula.value;
 
-	if(!ci){
-		alert('Ingrese cedula');
+	if (!ci){
+		alert ('Ingrese una cédula.');
 		f.cedula.focus();
-		return false;
+		return (false);
 	}
-	if(ci.length < 6){
-		alert('Faltan digitos a la cedula');
+
+	if (cedula.length < 6){
+		alert ('Faltan digitos a la cédula.');
 		f.cedula.focus();
-		return false;
+		return (false);
 	}
+
 }
-
-function validarbuscar2(f){
-
-	var buscar = f.buscar.value;
-
-	if(!buscar){
-		alert('Debe rellenar el campo buscar');
-		f.buscar.focus();
-		return false;
-	}
-}
-
-
-
 
 function soloNumeros(e){
        key = e.keyCode || e.which;

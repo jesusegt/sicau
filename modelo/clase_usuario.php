@@ -129,24 +129,24 @@
 			}
 
 		/* MOSTRAR */
-			public function MostrarUsuario($cedula){
+			public function MostrarUsuario($id){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-				$sql = "SELECT * FROM usuario WHERE cedula=:cedula";//sentencia sql para consultar
+				$sql = "SELECT * FROM usuario WHERE id=:id";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
-				$params = array ('cedula'=>$cedula);
+				$params = array ('id'=>$id);
 				$result->execute($params);//ejecuta la sentencia sql
 				$data = $result->fetchAll();//Acomoda en un arreglo el resultado de la búsqueda
 				return $data;//retornar el resultado de la sentencia sql
 			}
 
 		/* ACTUALIZAR */
-			public function ActualizarUsuario($cedula,$nombre,$apellido,$tipo,$nombre_usu,$contrasena){
+			public function ActualizarUsuario($id,$cedula,$nombre,$apellido,$tipo){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
-				$sql = "UPDATE usuario SET nombre='$nombre', apellido='$apellido', tipo='$tipo', nombre_usu='$nombre_usu', contrasena='$contrasena' WHERE cedula=:cedula";//sentencia sql para actualizar
+				$sql = "UPDATE usuario SET cedula='$cedula', nombre='$nombre', apellido='$apellido', tipo='$tipo' WHERE id=:id";//sentencia sql para actualizar
 				$result = $con->prepare($sql);//preparar la sentencia sql
-				$params = array ('cedula'=>$cedula);
+				$params = array ('id'=>$id);
 				$cambio = $result->execute($params);//ejecuta la sentencia sql
 				return $cambio;//retornar el resultado de la sentencia sql
 			}
@@ -321,7 +321,7 @@
 
 				if(empty($data)){
 					echo "<script>alert('Contraseña Actual Invalida.')</script>";//Mensaje de Registro no válida
-					//echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>";
+					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../controlador/ctr_usuario.php?sql=o&ci=$cedula'>";
 				}else{
 					echo "<script>alert('Contraseña cambiada con exito')</script>";//Mensaje de Registro válida
 					echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/bienvenido.html'>"; // ir a la pantalla de inicio
