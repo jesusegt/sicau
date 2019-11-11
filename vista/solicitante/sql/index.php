@@ -603,5 +603,7 @@ if($sql=='r'){
 	$dompdf->load_html(utf8_decode($html));
 	$dompdf->render($html);
 	$dompdf->stream("SICAU-SOLICITANTES.pdf", array('Attachment'=>'0'));
+	$_SESSION['sql'] = '';
+	$_SESSION['reportarcat'] = '';
 }
 ?>

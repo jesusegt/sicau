@@ -93,7 +93,7 @@ id int(11) AUTO_INCREMENT,
 fecha date NOT NULL,
 hora time NOT NULL,
 accion varchar(7) NOT NULL,
-estatus char NOT NULL
+estatus char NOT NULL,
 id_sol int NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_sol) REFERENCES solicitante(id)
