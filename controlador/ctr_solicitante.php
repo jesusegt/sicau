@@ -13,16 +13,16 @@
 	/*============================================================================*/
 	if(isset($_GET['list']) && $_GET['list']=="1"){//verifica que se alla presionado el boton especifico
 		$datos = $soli->Listar();//Invocamos al método de consultar persona
-		if(empty($datos)) //Si el método, retorna un arreglo vacío
+		/*if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 			$_SESSION['sql'] = "a";
 			echo "<script>alert('No existe ningun solicitante registrado.')</script>";//Mensaje de Registro no válida
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=ctr_solicitante.php?sql=a'>"; // ir a la pantalla de inicio
-		}else{
+		}else{*/
 			$_SESSION['catalago'] = $datos;
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/solicitante/'>"; // ir a la pantalla de inicio
 			//break;	
-		}
+		//}
 	}
 
 	/*============================================================================*/

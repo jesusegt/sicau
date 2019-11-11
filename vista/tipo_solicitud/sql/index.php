@@ -35,7 +35,7 @@ session_start();
 					<div class='panel-body'>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='25'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='25'>
 						</div>
 					</div>
 
@@ -135,7 +135,7 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo"$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='25'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo"$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='25'>
 						</div>
 					</div>
 

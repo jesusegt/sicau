@@ -144,20 +144,26 @@ function validarferiado(f){
 	var fechaf = f.fecha_final.value;
 
 	if (!motivo){
-		alert ('Ingrese un motivo.');
+		alert ('Ingrese un Motivo.');
 		f.motivo.focus();
 		return (false);
 	}
 
 	if (!fechai){
-		alert ('Seleccione una fecha inicial');
+		alert ('Seleccione una Fecha Inicial.');
 		f.fecha_inicial.focus();
 		return (false);
 	}
 
 	if (!fechaf){
-		alert ('Seleccione una fecha final');
+		alert ('Seleccione una Fecha Final.');
 		f.fecha_final.focus();
+		return (false);
+	}
+
+	if (fechai>fechaf){
+		alert ('La Fecha Inicial debe ser menor a la Fecha Final.')
+		f.fecha_inicial.focus();
 		return (false);
 	}
 }
@@ -195,6 +201,12 @@ function validarpermiso(f){
 	if (!fechaf){
 		alert ('Seleccione una fecha final');
 		f.fecha_final.focus();
+		return (false);
+	}
+
+	if (fechai>fechaf){
+		alert ('La Fecha Inicial debe ser menor a la Fecha Final.')
+		f.fecha_inicial.focus();
 		return (false);
 	}
 }
@@ -299,6 +311,25 @@ function validaractividad (f){
 function soloNumeros(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
+       letras = '0123456789';
+       especiales = '8-37-39-46';
+
+       tecla_especial = false;
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+}
+
+function soloTelefono(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
        letras = '0123456789-';
        especiales = '8-37-39-46';
 
@@ -335,3 +366,92 @@ function soloLetras(e){
         }
 }
 
+function soloFecha(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = '';
+       especiales = '37-39';
+
+       tecla_especial = false;
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+}
+
+function soloAlfanumerico(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = 'áéíóúabcdefghijklmnñopqrstuvwxyz0123456789-/ ';
+       especiales = '8-32-37-39-46';
+
+       tecla_especial = false;
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+}
+
+function soloUsuario(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = 'abcdefghijklmnopqrstuvwxyz0123456789-_.';
+       especiales = '8-32-37-39-46';
+
+       tecla_especial = false;
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+}
+
+function mayusculainicial(solicitar){
+	var index;
+	var tmpStr;
+	var tmpChar;
+	var preString;
+	var postString;
+	var strlen;
+	tmpStr = solicitar.value.toLowerCase();
+	strLen = tmpStr.length;
+	if (strLen > 0)
+	{
+		for (index = 0; index < strLen; index++)
+		{
+			if (index == 0)
+			{
+				tmpChar = tmpStr.substring(0,1).toUpperCase();
+				postString = tmpStr.substring(1,strLen);
+				tmpStr = tmpChar + postString;
+			}else{
+				tmpChar = tmpStr.substring(index, index+1);
+				if (tmpChar == " " && index < (strLen-1))
+				{
+				tmpChar = tmpStr.substring(index+1, index+2).toUpperCase();
+				preString = tmpStr.substring(0, index+1);
+				postString = tmpStr.substring(index+2,strLen);
+				tmpStr = preString + tmpChar + postString;
+				}
+			}
+		}
+	}
+solicitar.value = tmpStr;
+}

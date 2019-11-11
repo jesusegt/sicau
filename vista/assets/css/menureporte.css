@@ -5,3 +5,9 @@
 .ocultar{
 	display: none;
 }
+
+.select{
+	padding-top: 7px;
+	padding-bottom: 7px;
+	width: 236px;
+}

@@ -91,8 +91,9 @@ FOREIGN KEY (id_usu) REFERENCES usuario(id)
 CREATE TABLE asistencia (
 id int(11) AUTO_INCREMENT,
 fecha date NOT NULL,
-hora time NULL,
-accion varchar(7) NULL,
+hora time NOT NULL,
+accion varchar(7) NOT NULL,
+estatus char NOT NULL
 id_sol int NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_sol) REFERENCES solicitante(id)

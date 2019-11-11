@@ -21,7 +21,7 @@
 				</tr>
 				<tr>
 					<td align='center'>
-							<input type='text' class='tipotext' id='cedula' name='cedula' autocomplete='off' placeholder='Cedula del Obrero' value='' maxlength='10' onkeypress='return soloNumeros(event)'>
+							<input type='text' class='tipotext' id='cedula' name='cedula' autocomplete='off' placeholder='Cédula del Obrero' value='' maxlength='10' onkeypress='return soloNumeros(event)'>
 					</td>
 				</tr>
 				<?php date_default_timezone_set('America/Caracas'); ?>

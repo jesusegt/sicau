@@ -23,40 +23,46 @@ function seleccionado(){
 		}
 
 function validarreporte(f){
-				var reporte = document.getElementById('tipo_rep');
+	var reporte = document.getElementById('tipo_rep');
 
-				if (reporte.selectedIndex==false) {
-					alert ('Debe seleccionar un Periodo para el Reporte.');
-					f.reporte.focus();
-					return (false);
+	if (reporte.selectedIndex==false) {
+		alert ('Debe seleccionar un Periodo para el Reporte.');
+		f.reporte.focus();
+		return (false);
 				}
 			}
-			function validarreporteperso(f){
+function validarreporteperso(f){
 
-			var fechaini = f.fechaini.value;
-			var fechafin = f.fechafin.value;
+	var fechaini = f.fechaini.value;
+	var fechafin = f.fechafin.value;
 
 
-			if (!fechaini) {
-					alert('Debe indicar una fecha inicial.');
-					f.fechaini.focus();
-					return (false);
-				}
+	if (!fechaini) {
+		alert('Debe indicar una fecha inicial.');
+		f.fechaini.focus();
+		return (false);
+	}
 			
-			if (!fechafin) {
-					alert('Debe indicar una fecha final.');
-					f.fechafin.focus();
-					return (false);
-				}
-			}
+	if (!fechafin) {
+		alert('Debe indicar una fecha final.');
+		f.fechafin.focus();
+		return (false);
+	}
 
-			function validarreportemes(f){
+	if (fechaini>fechafin){
+		alert('La Fecha Inicial debe ser menor a la Fecha Final.');
+		f.fechaini.focus();
+		return (false);
+	}
+}
 
-				var mes = document.getElementById('mes');
+function validarreportemes(f){
 
-				if (mes.selectedIndex==false){
-					alert ('Debe seleccionar un mes.');
-					f.mes.focus();
-					return (false);
-				}
-			}
+	var mes = document.getElementById('mes');
+
+	if (mes.selectedIndex==false){
+		alert ('Debe seleccionar un mes.');
+		f.mes.focus();
+		return (false);
+	}
+}

@@ -89,6 +89,12 @@
 			public function RegistrarPermiso($cedula, $motivo, $fecha_inicial, $fecha_final){
 				require_once("conexionpdo.php"); //se llama al archivo para la conexion
 
+				$fecha_bdi= $fecha_inicial;
+				$fecha_inicial = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fecha_final;
+				$fecha_final = date('Y-m-d', strtotime($fecha_bdf));
+
 				$sql = "SELECT * FROM solicitante WHERE cedula='$this->cedula'";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
 		    	$result->execute(); //ejecuta la sentencia sql
@@ -113,7 +119,7 @@
 
 						}else{
 							// FROM sol_per AS sp INNER JOIN solicitante AS s ON sp.id_sol=s.id INNER JOIN permiso AS p ON sp.id_per=p.id WHERE
-							$sql = "SELECT * FROM sol_per AS sp INNER JOIN permiso AS p ON sp.id_per=p.id WHERE sp.id_sol=$idsol AND (p.fecha_inicial<='$this->fecha_inicial' AND p.fecha_final >= '$this->fecha_final')";//sentencia sql para consultar
+							$sql = "SELECT * FROM sol_per AS sp INNER JOIN permiso AS p ON sp.id_per=p.id WHERE sp.id_sol=$idsol AND (p.fecha_inicial<='$this->fecha_inicial' AND p.fecha_final >= '$this->fecha_final') AND estatus='a'";//sentencia sql para consultar
 							$result = $con->prepare($sql);//preparar la sentencia sql
 						    $result->execute(); //ejecuta la sentencia sql
 							$data = $result->fetchAll();
@@ -209,6 +215,12 @@
 			public function ActualizarPermiso($id, $cedula, $motivo, $fecha_inicial, $fecha_final){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 				
+				$fecha_bdi= $fecha_inicial;
+				$fecha_inicial = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fecha_final;
+				$fecha_final = date('Y-m-d', strtotime($fecha_bdf));
+
 				$sql = "SELECT * FROM solicitante WHERE cedula='$this->cedula'";//sentencia sql para consultar
 				$result = $con->prepare($sql);//preparar la sentencia sql
 		    	$result->execute(); //ejecuta la sentencia sql

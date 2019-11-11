@@ -25,7 +25,7 @@ session_start();
 				</tr>
 				<tr>
 					<td align='center'>
-							<input type='text' class='tipotext' id='cedula' name='cedula' autocomplete='off' placeholder='Cedula del Trabajador' value='' maxlength='10' onkeypress='return soloNumeros(event)'>
+							<input type='text' class='tipotext' id='cedula' name='cedula' autocomplete='off' placeholder='Cédula del Obrero' value='' maxlength='10' onkeypress='return soloNumeros(event)'>
 					</td>
 				</tr>
 				<?php date_default_timezone_set('America/Caracas'); ?>
@@ -160,6 +160,7 @@ session_start();
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/estilo.css'>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/menureporte.css'>
+		<link rel='stylesheet' type='text/css' href='../../assets/jquery-ui/jquery-ui.min.css'>
 	</head>
 	
 	<body>
@@ -174,7 +175,7 @@ session_start();
 				</tr>
 				<tr>
 					<td align='center'>
-							<select class='tipotext' name='tipo_rep' id='tipo_rep' onchange='seleccionado()'>
+							<select class='tipotext select' name='tipo_rep' id='tipo_rep' onchange='seleccionado()'>
 								<option value=''>...</option>
 								<option value='1'>Últimos 15 días</option>
 								<option value='2'>Mes especifico</option>
@@ -185,17 +186,17 @@ session_start();
 				</tr>
 				<tr id='perso' class='ocultar box' >
 					<td align='center'>
-							<input type='date' class='tipotext' id='fecha1' name='fechaini' value=''>
+							<input type='text' class='tipotext' id='fecha_ini' name='fechaini' value='' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 					</td>
 				</tr>
 				<tr id='perso2' class='ocultar box' >
 					<td align='center'>
-							<input type='date' class='tipotext' id='fecha2' name='fechafin' value=''>
+							<input type='text' class='tipotext' id='fecha_fin' name='fechafin' value='' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 					</td>
 				</tr>
 				<tr id='mess' class='ocultar box' >
 					<td align='center'>
-							<select class='tipotext' name='mes' id='mes'>
+							<select class='tipotext select' name='mes' id='mes'>
 								<option value=''>...</option>
 								<option value='01'>Enero</option>
 								<option value='02'>Febrero</option>
@@ -220,8 +221,19 @@ session_start();
 				</tr>
 			</table>
 		</form>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
 <script type='text/javascript' src='../../assets/js/jquery-3.3.1.min.js'></script>
 <script type='text/javascript' src='../../assets/js/reporte.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery-ui.min.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery.ui.datepicker-es.js'></script>
+<script type="text/javascript">
+	$(function () {
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+$("#fecha_ini,#fecha_fin").datepicker({
+	beforeShowDay: $.datepicker.noWeekends 
+});
+});
+</script>
 <?php 
 	}
 if($sql=='r'){
@@ -244,7 +256,7 @@ if($sql=='r'){
 		"<!DOCTYPE html>
 		<html>
 		<head>
-			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes.css'>
+			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes2.css'>
 		</head>
 		<body>
 				<div class='contenedor'>
@@ -263,7 +275,7 @@ if($sql=='r'){
 					<div class='panel panel-bordered'>
 						<div class='panel-body'>
 							<div class='tabla'>
-								<table class='table table-hover' id='tabla'>
+								<table class='table table-hover full' id='tabla'>
 									<thead>
 										<tr>
 											<th>Cédula</th>

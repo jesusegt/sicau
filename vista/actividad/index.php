@@ -31,7 +31,7 @@ session_start();
 						<table class='table table-hover' id='tabla'>
 							<thead>
 								<tr>
-									<th>Cedula</th>
+									<th>Cédula</th>
 									<th>Nombre y Apellido</th>
 									<th>Fecha</th>
 								</tr>

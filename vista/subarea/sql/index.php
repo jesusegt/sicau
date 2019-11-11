@@ -54,7 +54,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Sub-area</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' 
+							<input type='text' class='form-control' name='nombre' placeholder='...' onkeyup='mayusculainicial(this)' onkeypress='return soloAlfanumerico(event)'
 							value='' autocomplete='off'  id='miInput' maxlength='25'>
 						</div>
 
@@ -196,7 +196,7 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Sub-area</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off'  id='miInput' maxlength='25'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off'  id='miInput' maxlength='25' onkeyup='mayusculainicial(this)' onkeypress='return soloAlfanumerico(event)'>
 						</div>
 
 					<div class='panel-footer'>

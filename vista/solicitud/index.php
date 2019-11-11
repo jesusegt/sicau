@@ -22,7 +22,7 @@ session_start();
 			</h1>
 			<a href='../../controlador/ctr_solicitud.php?list=2' class='btn btn-add-new'>
 				<i></i>
-				<span>Solicitudes Completadas</span>
+				<span>Solicitudes Realizadas</span>
 			</a>
 		</div>
 		<div class='contenedor'>
@@ -35,7 +35,7 @@ session_start();
 						<table class='table table-hover' id='tabla'>
 							<thead>
 								<tr>
-									<th>Cedula</th>
+									<th>Cédula</th>
 									<th>Nombre y Apellido</th>
 									<!--<th>Motivo</th>-->
 									<th>Tipo</th>
@@ -63,7 +63,7 @@ session_start();
 											?>
 										</td>
 										<td>
-											<a onclick="javascript:return confirm('¿Seguro de completar este registro?');" href="../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $r->idsoli; ?>" class='btn btn-add-new pull-right' style='margin-left: 3px;'>Completar</a>
+											<a onclick="javascript:return confirm('¿Seguro de realizar esta Solicitud?');" href="../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $r->idsoli; ?>" class='btn btn-add-new pull-right' style='margin-left: 3px;'>Realizar</a>
 											<a href="../../controlador/ctr_solicitud.php?sql=c&id=<?php echo $r->idsoli; ?>" class='btn btn-warning pull-right'>Ver</a>
 										</td>
 									</tr>

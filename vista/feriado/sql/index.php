@@ -12,7 +12,7 @@ session_start();
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
-		<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+		<link rel='stylesheet' type='text/css' href='../../assets/jquery-ui/jquery-ui.min.css'>
 	</head>
 	<body>
 
@@ -34,21 +34,33 @@ session_start();
 					<div class='panel-body'>
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'  id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off'  id='miInput' maxlength='50' onkeypress='return soloAlfanumerico(event)' onkeyup='mayusculainicial(this)'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_inicial'>Fecha Inicial</label>
-							<input type='date' class='form-control' name='fecha_inicial' value='' id='miInput'>
+							<input type='text' class='form-control' name='fecha_inicial' value='' id='fecha_ini' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_final'>Fecha Final</label>
-							<input type='date' class='form-control' name='fecha_final' value='' id='miInput'>
+							<input type='text' class='form-control' name='fecha_final' value='' id='fecha_fin' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 						</div>
 
 					<div class='panel-footer'>
 						<input type='submit' class='btn btn-primary save' name='guardar' value='Guardar'>
 					</div>
 				</form>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+<script type='text/javascript' src='../../assets/js/jquery-3.3.1.min.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery-ui.min.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery.ui.datepicker-es.js'></script>
+<script type="text/javascript">
+	$(function () {
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+$("#fecha_ini,#fecha_fin").datepicker({
+	beforeShowDay: $.datepicker.noWeekends 
+});
+});
+</script>
 <?php 
 	}
 	if($sql=="c"){//si se trata de una consulta 
@@ -131,6 +143,12 @@ foreach($datosm as $d){
 	@$motivo=$d['motivo'];
 	@$fecha_inicial=$d['fecha_inicial'];
 	@$fecha_final=$d['fecha_final'];
+
+	$fecha_bdi= $fecha_inicial;
+	$fecha_inicial = date('d-m-Y', strtotime($fecha_bdi));
+
+	$fecha_bdf= $fecha_final;
+	$fecha_final = date('d-m-Y', strtotime($fecha_bdf));
 }
 ?>	
 <!DOCTYPE html>
@@ -139,7 +157,7 @@ foreach($datosm as $d){
 		<meta charset='utf-8'>
 		<title>SICAU-SG</title>
 		<link rel='stylesheet' type='text/css' href='../../assets/css/trabajadores.css'>
-		<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+		<link rel='stylesheet' type='text/css' href='../../assets/jquery-ui/jquery-ui.min.css'>
 	</head>
 	<body>
 
@@ -165,21 +183,33 @@ foreach($datosm as $d){
 
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off'  id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off'  id='miInput' maxlength='50' onkeypress='return Alfanumerico(event)' onkeyup='mayusculainicial(this)'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_inicial'>Fecha inicial</label>
-							<input type='date' class='form-control' name='fecha_inicial' value='<?php echo "$fecha_inicial"; ?>' id='miInput'>
+							<input type='text' class='form-control' name='fecha_inicial' value='<?php echo "$fecha_inicial"; ?>' id='fecha_ini' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_final'>Fecha Final</label>
-							<input type='date' class='form-control' name='fecha_final' value='<?php echo "$fecha_final"; ?>' id='miInput'>
+							<input type='text' class='form-control' name='fecha_final' value='<?php echo "$fecha_final"; ?>' id='fecha_fin' placeholder='dd-mm-aa' maxlength='10' autocomplete='off' onkeypress='return soloFecha(event)'>
 						</div>
 
 					<div class='panel-footer'>
 						<input type='submit' class='btn btn-primary save' name='accion' value='Actualizar'>
 					</div>
 				</form>
+<script type='text/javascript' src='../../assets/js/validaciones.js'></script>
+<script type='text/javascript' src='../../assets/js/jquery-3.3.1.min.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery-ui.min.js'></script>
+<script type='text/javascript' src='../../assets/jquery-ui/jquery.ui.datepicker-es.js'></script>
+<script type="text/javascript">
+	$(function () {
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+$("#fecha_ini,#fecha_fin").datepicker({
+	beforeShowDay: $.datepicker.noWeekends 
+});
+});
+</script>
 <?php 
 	}
 	if($sql=='i'){

@@ -62,6 +62,12 @@
 			public function RegistrarFeriado($motivo, $fecha_inicial, $fecha_final){
 				require_once("conexionpdo.php"); //se llama al archivo para la conexion
 
+				$fecha_bdi= $fecha_inicial;
+				$fecha_inicial = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fecha_final;
+				$fecha_final = date('Y-m-d', strtotime($fecha_bdf));
+
 				$sql = "INSERT INTO dia_feriado (motivo, fecha_inicial, fecha_final, estatus)VALUES (:motivo, :fecha_inicial, :fecha_final, :estatus)"; //sentencia sql para registrar 
 				$insert = $con->prepare($sql); //preparar la sentencia sql
 					//Excecute
@@ -96,6 +102,12 @@
 		/* ACTUALIZAR */
 			public function ActualizarFeriado($id, $motivo, $fecha_inicial, $fecha_final){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
+				
+				$fecha_bdi= $fecha_inicial;
+				$fecha_inicial = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fecha_final;
+				$fecha_final = date('Y-m-d', strtotime($fecha_bdf));
 				
 				$sql = "UPDATE dia_feriado SET motivo='$motivo', fecha_inicial='$fecha_inicial', fecha_final='$fecha_final' WHERE id=:id";//sentencia sql para actualizar
 				$result = $con->prepare($sql);//preparar la sentencia sql

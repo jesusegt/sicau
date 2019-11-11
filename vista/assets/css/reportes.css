@@ -9,6 +9,11 @@ body {
     color: #76838f;
 }
 
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .page-title {
     display: inline-block;
     font-size: 18px;

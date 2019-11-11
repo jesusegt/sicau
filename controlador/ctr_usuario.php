@@ -11,16 +11,16 @@
 	/*============================================================================*/
 	if(isset($_GET['list']) && $_GET['list']=="1"){//verifica que se alla presionado el boton especifico
 		$datos = $usu->Listar();//Invocamos al método de consultar persona
-		if(empty($datos)) //Si el método, retorna un arreglo vacío
+		/*if(empty($datos)) //Si el método, retorna un arreglo vacío
 		{
 			$_SESSION['sql'] = "a";
 			echo "<script>alert('No existe ningun usuario registrado.')</script>";//Mensaje de Registro no válida
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/usuario/sql/'>"; // ir a la pantalla de inicio
-		}else{
+		}else{*/
 			$_SESSION['catalago'] = $datos;
 			echo "<META HTTP-EQUIV='refresh' CONTENT='0; URL=../vista/usuario/'>"; // ir a la pantalla de inicio
 	
-		}
+		//}
 	}
 
 	/*============================================================================*/

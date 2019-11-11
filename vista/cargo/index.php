@@ -57,15 +57,18 @@ session_start();
 									if(@$_SESSION['catalago']){
 									@$datoss = $_SESSION['catalago'];//arreglo que trae los datos de la tabla
 
-									foreach(@$datoss as $r): 
+									foreach(@$datoss as $r):
+									$nombre=$r->nombre; 
 								?>
 									<tr>
 
 										<td>
-											<?php echo $r->nombre; ?>
+											<?php echo $nombre; ?>
 										</td>
 										<td>
+											<?php if($nombre!='Obrero'){ ?>
 											<a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="../../controlador/ctr_cargo.php?sql=e&id=<?php echo $r->id; ?>" class='btn btn-delete pull-right'>Eliminar</span>
+											<?php } ?>
 											<a href="../../controlador/ctr_cargo.php?sql=m&id=<?php echo $r->id; ?>" class='btn btn-primary pull-right'>
 												Editar
 											</a>

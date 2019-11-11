@@ -39,11 +39,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='sexo'>Sexo</label>
@@ -69,7 +69,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='telefono'>Telefono</label>
-							<input type='text' class='form-control' name='telefono' placeholder='...' value='' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput' maxlength='12'>
+							<input type='text' class='form-control' name='telefono' placeholder='...' value='' autocomplete='off' onkeypress='return soloTelefono(event)' id='miInput' maxlength='12'>
 						</div>
 						<div class='form-group'>
 							<label for='correo'>Correo</label>
@@ -382,11 +382,11 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo "$nombre"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo "$apellido"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo "$apellido"; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='sexo'>Sexo</label>
@@ -411,7 +411,7 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='telefono'>Telefono</label>
-							<input type='text' class='form-control' name='telefono' placeholder='...' value='<?php echo "$telefono"; ?>' autocomplete='off' onkeypress='return soloNumeros(event)' id='miInput' maxlength='12'>
+							<input type='text' class='form-control' name='telefono' placeholder='...' value='<?php echo "$telefono"; ?>' autocomplete='off' onkeypress='return soloTelefono(event)' id='miInput' maxlength='12'>
 						</div>
 						<div class='form-group'>
 							<label for='correo'>Correo</label>
@@ -528,7 +528,7 @@ if($sql=='r'){
 		"<!DOCTYPE html>
 		<html>
 		<head>
-			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes.css'>
+			<link rel='stylesheet' type='text/css' href='../../assets/css/reportes2.css'>
 		</head>
 		<body>
 				<div class='contenedor'>
@@ -547,7 +547,7 @@ if($sql=='r'){
 				<div class='contenedor'>
 					<div class='panel panel-bordered'>
 						<div class='panel-body'>
-							<div class='tabla'>
+							<div class='tabla center'>
 								<table class='table table-hover' id='tabla'>
 									<thead>
 										<tr>

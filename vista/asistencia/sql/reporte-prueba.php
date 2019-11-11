@@ -17,7 +17,7 @@
 						<i></i>
 						Reporte Todas las Asistencias
 					</h1>
-				<?php echo date('Y'); ?>
+				<?php echo date('D'); ?>
 				<div class='contenedor'>
 					<div class='panel panel-bordered'>
 						<div class='panel-body'>

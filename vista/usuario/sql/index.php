@@ -42,11 +42,11 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' id='miInput' maxlength='50'>
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)' id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='tipo'>Tipo</label>
@@ -58,7 +58,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='nombre_usu'>Usuario</label>
-							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='' autocomplete='off' id='miInput' maxlength='25'>
+							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='' autocomplete='off' id='miInput' maxlength='25' onkeyup="this.value=this.value.toLowerCase()" onkeypress='return soloUsuario(event)'>
 						</div>
 						<div class='form-group'>
 							<label for='contrasena'>Contraseña</label> 
@@ -308,12 +308,12 @@ foreach($datosm as $d){
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)'
 							id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)'
 							id='miInput' maxlength='50'>
 						</div> 
 						<div class='form-group'>
@@ -457,18 +457,18 @@ foreach($datosp as $p){
 						</div>
 						<div class='form-group'>
 							<label for='nombre'>Nombre</label>
-							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
+							<input type='text' class='form-control' name='nombre' placeholder='...' value='<?php echo $nombre; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)'
 							id='miInput' maxlength='50'>
 						</div>
 						<div class='form-group'>
 							<label for='apellido'>Apellido</label>
-							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)'
+							<input type='text' class='form-control' name='apellido' placeholder='...' value='<?php echo $apellido; ?>' autocomplete='off' onkeypress='return soloLetras(event)' onkeyup='mayusculainicial(this)'
 							id='miInput' maxlength='50'>
 						</div>
 
 						<div class='form-group'>
 							<label for='nombre_usu'>Usuario</label>
-							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='<?php echo $nombre_usu; ?>' autocomplete='off' id='miInput' 
+							<input type='text' class='form-control' name='nombre_usu' placeholder='...' value='<?php echo $nombre_usu; ?>' autocomplete='off' id='miInput' onkeyup='this.value=this.value.toLowerCase()' onkeypress='return soloUsuario(event)'
 							maxlength='25'>
 						</div>
 					</div>

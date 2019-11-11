@@ -56,7 +56,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off' maxlength='100'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='' autocomplete='off' maxlength='100' onkeypress='return Alfanumerico(event)'>
 						</div>
 						<div class='form-group'>
 							<label for='id_tipo'>Tipo</label>
@@ -107,7 +107,7 @@ session_start();
 						</div>
 						<div class='form-group'>
 							<label for='comentario'>Comentario</label>
-							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4' maxlength='200'></textarea>
+							<textarea class='form-control' name='comentario' placeholder='...' value='' autocomplete='off' rows='4' maxlength='200' onkeypress='return Alfanumerico(event)'></textarea>
 						</div>
 					</div>
 
@@ -160,7 +160,7 @@ foreach($datosc as $c){
 				<i></i>
 				<span>Volver a la lista</span>
 			</a>
-			<a onclick="javascript:return confirm('¿Seguro de completar este registro?');" href="../../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $idsoli; ?>" class='btn btn-add-new' style='margin-left: 3px;'>Completar</a>
+			<a onclick="javascript:return confirm('¿Seguro de realizar esta Solicitud?');" href="../../../controlador/ctr_solicitud.php?sql=v&id=<?php echo $idsoli; ?>" class='btn btn-add-new' style='margin-left: 3px;'>Completar</a>
 			
 		</div>
 
@@ -268,7 +268,7 @@ if($sql=='i'){ ?>
 		<div class='contenedor'>
 			<h1 class='page-title'>
 				<i></i>
-				Solicitudes Completadas
+				Solicitudes Realizadas
 			</h1>
 			<a href='../../../controlador/ctr_solicitud.php?list=1' class='btn btn-warning'>
 				<i></i>
