@@ -129,7 +129,7 @@
 								$result = $con->prepare($sql);//preparar la sentencia sql
 								$result->execute(); //ejecuta la sentencia sql
 								$data = $result->fetchAll();
-								foreach($data as $u){//se optiene el valor de cada campo de la tabla
+								foreach($data as $u){//se obtiene el valor de cada campo de la tabla
 								@$idperm=$u['MAX(id)'];}
 												
 								$id_permiso=$idperm+1;

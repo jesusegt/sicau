@@ -22,6 +22,14 @@ function seleccionado(){
 		    }
 		}
 
+function cerrar(){
+	$('#perso').removeClass("mostrar").addClass("ocultar");
+	$('#perso2').removeClass("mostrar").addClass("ocultar");
+	$('#mess').removeClass("mostrar").addClass("ocultar");
+	$('#form').attr("onsubmit", "return validarreporte(this)");
+	$('#tipo_rep').val("");
+}
+
 function validarreporte(f){
 	var reporte = document.getElementById('tipo_rep');
 

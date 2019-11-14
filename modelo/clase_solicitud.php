@@ -72,6 +72,46 @@
 					return $this->id_solicitud;
 				}*/
 
+		// Nombre
+			//setters
+				public function setTipo_rep($tipo_rep){
+					$this->tipo_rep = $tipo_rep;
+				}
+			//getters
+				public function getTipo_rep(){
+					return $this->tipo_rep;
+				}
+
+		// Nombre
+			//setters
+				public function setFechaini($fechaini){
+					$this->fechaini = $fechaini;
+				}
+			//getters
+				public function getFechaini(){
+					return $this->fechaini;
+				}
+
+		// Nombre
+			//setters
+				public function setFechafin($fechafin){
+					$this->fechafin = $fechafin;
+				}
+			//getters
+				public function getFechafin(){
+					return $this->fechafin;
+				}
+
+		// Nombre
+			//setters
+				public function setMes($mes){
+					$this->mes = $mes;
+				}
+			//getters
+				public function getMes(){
+					return $this->mes;
+				}
+
 
 
 
@@ -330,5 +370,199 @@
 				return $data;//retornar el resultado de la sentencia sql
 			}
 
-	}
+	//REPORTE SOLICITUDES
+		/* LISTAR TODAS */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$sql = "SELECT 	s.cedula AS cedulasol, 
+									s.nombre AS nombresol,
+									s.apellido AS apellidosol,
+									t.nombre AS tipo,
+									a.nombre AS area,
+									sa.nombre AS subarea,
+									ss.motivo AS motivo,
+									ss.fecha AS fecha,
+									ss.id AS idsoli
+							FROM solicitud AS ss INNER JOIN solicitante AS s 
+							ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t 
+							ON ss.id_tipo=t.id INNER JOIN subarea AS sa
+							ON ss.id_subarea=sa.id INNER JOIN area AS a 
+							ON sa.id_area=a.id WHERE ss.estatus='a' ORDER BY ss.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR MES */
+			public function ListarReporte2($mes){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$year= date('Y');
+				$sql = "SELECT 	s.cedula AS cedulasol, 
+									s.nombre AS nombresol,
+									s.apellido AS apellidosol,
+									t.nombre AS tipo,
+									a.nombre AS area,
+									sa.nombre AS subarea,
+									ss.motivo AS motivo,
+									ss.fecha AS fecha,
+									ss.id AS idsoli
+							FROM solicitud AS ss INNER JOIN solicitante AS s 
+							ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t 
+							ON ss.id_tipo=t.id INNER JOIN subarea AS sa
+							ON ss.id_subarea=sa.id INNER JOIN area AS a 
+							ON sa.id_area=a.id WHERE ss.estatus='a' AND (ss.fecha>='$year-$mes-01' AND ss.fecha <= '$year-$mes-31') ORDER BY ss.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR -15 DÍAS */
+			public function ListarReporte3(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fechahoy=date('Y-m-d');
+				$fechanew= date('Y-m-d',strtotime($fechahoy.'- 15 days'));
+
+				$sql = "SELECT 	s.cedula AS cedulasol, 
+									s.nombre AS nombresol,
+									s.apellido AS apellidosol,
+									t.nombre AS tipo,
+									a.nombre AS area,
+									sa.nombre AS subarea,
+									ss.motivo AS motivo,
+									ss.fecha AS fecha,
+									ss.id AS idsoli
+							FROM solicitud AS ss INNER JOIN solicitante AS s 
+							ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t 
+							ON ss.id_tipo=t.id INNER JOIN subarea AS sa
+							ON ss.id_subarea=sa.id INNER JOIN area AS a 
+							ON sa.id_area=a.id WHERE ss.estatus='a' AND (ss.fecha>='$fechanew' AND ss.fecha <= '$fechahoy') ORDER BY ss.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR PERSONALIZADO */
+			public function ListarReporte4($fechaini,$fechafin){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fecha_bdi= $fechaini;
+				$fechaini = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fechafin;
+				$fechafin = date('Y-m-d', strtotime($fecha_bdf));
+				
+				$sql = "SELECT 	s.cedula AS cedulasol, 
+									s.nombre AS nombresol,
+									s.apellido AS apellidosol,
+									t.nombre AS tipo,
+									a.nombre AS area,
+									sa.nombre AS subarea,
+									ss.motivo AS motivo,
+									ss.fecha AS fecha,
+									ss.id AS idsoli
+							FROM solicitud AS ss INNER JOIN solicitante AS s 
+							ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t 
+							ON ss.id_tipo=t.id INNER JOIN subarea AS sa
+							ON ss.id_subarea=sa.id INNER JOIN area AS a 
+							ON sa.id_area=a.id WHERE ss.estatus='a' AND (ss.fecha>='$fechaini' AND ss.fecha <= '$fechafin') ORDER BY ss.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+	//REPORTE SOLICITUDES COMPLETADAS
+		/* LISTAR TODAS */
+			public function ListarReporteC(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$sql = "SELECT  ss.id AS idsoli,
+								ss.fecha AS fechasoli,
+								se.fecha AS fechaser,
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol,
+								s.cedula AS cedulasol,
+								t.nombre AS tipo
+						FROM servicio AS se INNER JOIN solicitud AS ss 
+						ON se.id_solicitud=ss.id INNER JOIN solicitante AS s 
+						ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t
+						ON ss.id_tipo=t.id WHERE ss.estatus='i' ORDER BY se.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR MES */
+			public function ListarReporteC2($mes){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$year= date('Y');
+				$sql = "SELECT  ss.id AS idsoli,
+								ss.fecha AS fechasoli,
+								se.fecha AS fechaser,
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol,
+								s.cedula AS cedulasol,
+								t.nombre AS tipo
+						FROM servicio AS se INNER JOIN solicitud AS ss 
+						ON se.id_solicitud=ss.id INNER JOIN solicitante AS s 
+						ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t
+						ON ss.id_tipo=t.id WHERE ss.estatus='i' AND (se.fecha>='$year-$mes-01' AND se.fecha <= '$year-$mes-31') ORDER BY se.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR -15 DÍAS */
+			public function ListarReporteC3(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fechahoy=date('Y-m-d');
+				$fechanew= date('Y-m-d',strtotime($fechahoy.'- 15 days'));
+
+				$sql = "SELECT  ss.id AS idsoli,
+								ss.fecha AS fechasoli,
+								se.fecha AS fechaser,
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol,
+								s.cedula AS cedulasol,
+								t.nombre AS tipo
+						FROM servicio AS se INNER JOIN solicitud AS ss 
+						ON se.id_solicitud=ss.id INNER JOIN solicitante AS s 
+						ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t
+						ON ss.id_tipo=t.id WHERE ss.estatus='i' AND (se.fecha>='$fechanew' AND se.fecha <= '$fechahoy') ORDER BY se.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR PERSONALIZADO */
+			public function ListarReporteC4($fechaini,$fechafin){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fecha_bdi= $fechaini;
+				$fechaini = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fechafin;
+				$fechafin = date('Y-m-d', strtotime($fecha_bdf));
+				
+				$sql = "SELECT  ss.id AS idsoli,
+								ss.fecha AS fechasoli,
+								se.fecha AS fechaser,
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol,
+								s.cedula AS cedulasol,
+								t.nombre AS tipo
+						FROM servicio AS se INNER JOIN solicitud AS sse
+						ON se.id_solicitud=ss.id INNER JOIN solicitante AS s 
+						ON ss.id_sol=s.id INNER JOIN tipo_solicitud AS t
+						ON ss.id_tipo=t.id WHERE ss.estatus='i' AND (se.fecha>='$fechaini' AND se.fecha <= '$fechafin') ORDER BY se.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+	}//cierre clase
 ?>

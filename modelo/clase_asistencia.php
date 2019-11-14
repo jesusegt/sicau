@@ -364,9 +364,9 @@
 						}	
 					}
 				}
-	
-		/* LISTAR REPORTE GENERAL */
-			public function ListarReporte(){
+	/* REPORTES COMPLETAS*/
+		/* LISTAR TODAS */
+			public function ListarReporteC(){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
 				$sql = "SELECT 
@@ -400,8 +400,8 @@
 				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
 
-		/* LISTAR REPORTE2 GENERAL */
-			public function ListarReporte2($mes){
+		/* LISTAR MES */
+			public function ListarReporteC2($mes){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
 				$year= date('Y');
@@ -436,8 +436,8 @@
 				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
 
-		/* LISTAR REPORTE3 GENERAL */
-			public function ListarReporte3(){
+		/* LISTAR -15 DÍAS */
+			public function ListarReporteC3(){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
 				$fechahoy=date('Y-m-d');
@@ -474,9 +474,15 @@
 				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
 
-			/* LISTAR REPORTE3 GENERAL */
-			public function ListarReporte4($fechaini,$fechafin){
+		/* LISTAR PERSONALIZADO */
+			public function ListarReporteC4($fechaini,$fechafin){
 				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fecha_bdi= $fechaini;
+				$fechaini = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fechafin;
+				$fechafin = date('Y-m-d', strtotime($fecha_bdf));
 
 				$sql = "SELECT 
 							T3.cedulasol, T3.nombresol, T3.apellidosol, T1.fechaasis, T1.horaen, T2.horasa
@@ -509,75 +515,91 @@
 				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
 
-	}//cierre de la clase
 
-	/*SET @row_number = 0;
-SELECT
-  T1.rownum, T1.idasis, T1.fechaasis, T1.horaen, T1.accion,
-  T2.idasis, T2.fechaasis, T2.horasa, T2.accion
-FROM
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horaen,
-		accion AS accion,
- 		@rownum:=@rownum+1 AS rownum
-	FROM (SELECT @rownum:=0) r, asistencia WHERE accion='entrada'
-) T1
-INNER JOIN
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horasa,
-		accion AS accion,
- 		@rownum:=@rownum+1 AS rownum
-	FROM (SELECT @rownum:=0) r, asistencia WHERE accion='salida'
-) T2 ON T1.fechaasis = T2.fechaasis ORDER BY T1.idasis ASC;
+	/* REPORTES INCOMPLETAS*/
 
-SELECT
-  T1.rownum, T1.idasis, T1.fechaasis, T1.horaen, T1.accion,
-  T2.idasis, T2.fechaasis, T2.horasa, T2.accion
-FROM
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horaen,
-		accion AS accion,
- 		id_sol AS idsol,
- 		@rownum:=@rownum+1 AS rownum
-	FROM (SELECT @rownum:=0) r, asistencia WHERE accion='entrada'
-) T1
-INNER JOIN
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horasa,
-		accion AS accion,
- 		id_sol AS idsol,
- 		@rownum:=@rownum+1 AS rownum
-	FROM (SELECT @rownum:=0) r, asistencia WHERE accion='salida'
-) T2 ON T1.idsol = T2.idsol WHERE T1.fechaasis=T2.fechaasis ORDER BY T1.idasis ASC;
+		/* LISTAR TODAS */
+			public function ListarReporteI(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
 
+				$sql = "SELECT a.id AS idasis,
+								a.fecha AS fechaasis,
+								a.hora AS hora,
+								a.accion AS accion,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM asistencia AS a INNER JOIN solicitante AS s 
+						ON a.id_sol=s.id WHERE accion='entrada' AND a.estatus='i' ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
 
-SELECT
-   T3.cedulasol, T3.nombresol, T3.apellidosol, T1.fechaasis, T1.horaen, T2.horasa
-FROM
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horaen,
-		accion AS accion,
- 		id_sol AS idsol
-	FROM asistencia WHERE accion='entrada'
-) T1
-INNER JOIN
-( SELECT id AS idasis,
-		fecha AS fechaasis,
-		hora AS horasa,
-		accion AS accion,
- 		id_sol AS idsol
-	FROM asistencia WHERE accion='salida'
-) T2 ON T1.idsol = T2.idsol
-INNER JOIN
-( SELECT id AS idsol, cedula AS cedulasol, nombre AS nombresol, apellido AS apellidosol
-  FROM solicitante
-) T3 ON T1.idsol = T3.idsol
-WHERE T1.fechaasis=T2.fechaasis ORDER BY T1.idasis ASC;
-*/
+		/* LISTAR MES */
+			public function ListarReporteI2($mes){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				@$year= date('Y');
+				$sql = "SELECT a.id AS idasis,
+								a.fecha AS fechaasis,
+								a.hora AS hora,
+								a.accion AS accion,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM asistencia AS a INNER JOIN solicitante AS s 
+						ON a.id_sol=s.id WHERE accion='entrada' AND a.estatus='i' AND (a.fecha>='$year-$mes-01' AND a.fecha<='$year-$mes-31') ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR -15 DÍAS */
+			public function ListarReporteI3(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fechahoy=date('Y-m-d');
+				$fechanew= date('Y-m-d',strtotime($fechahoy.'- 15 days'));
+
+				$sql = "SELECT a.id AS idasis,
+								a.fecha AS fechaasis,
+								a.hora AS hora,
+								a.accion AS accion,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM asistencia AS a INNER JOIN solicitante AS s 
+						ON a.id_sol=s.id WHERE accion='entrada' AND a.estatus='i' AND (a.fecha>='$fechanew' AND a.fecha<='$fechahoy') ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR PERSONALIZADO */
+			public function ListarReporteI4($fechaini,$fechafin){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fecha_bdi= $fechaini;
+				$fechaini = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fechafin;
+				$fechafin = date('Y-m-d', strtotime($fecha_bdf));
+
+				$sql = "SELECT a.id AS idasis,
+								a.fecha AS fechaasis,
+								a.hora AS hora,
+								a.accion AS accion,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM asistencia AS a INNER JOIN solicitante AS s 
+						ON a.id_sol=s.id WHERE accion='entrada' AND a.estatus='i' AND (a.fecha>='$fechaini' AND a.fecha<='$fechafin') ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+	}//CIERRE DE LA CLASE
 
 ?>

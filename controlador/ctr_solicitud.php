@@ -122,4 +122,122 @@
 			//break;	
 		}
 	}
+
+	/*============================================================================*/
+	/*### REPORTE ################################################################*/
+	/*============================================================================*/
+	if(isset($_POST['reporte']) && $_POST['reporte']=="Procesar")//verifica que se alla presionado el boton especifico
+	{
+		@$sql="r";
+		@$_SESSION['reportarcat']=null;
+		$tipo_rep = $_POST['tipo_rep'];
+		$fechaini = $_POST['fechaini'];
+		$fechafin = $_POST['fechafin'];
+		$mes = $_POST['mes'];
+
+		$solicitud->setTipo_rep($_POST['tipo_rep']);
+		$solicitud->setFechaini($_POST['fechaini']);
+		$solicitud->setFechafin($_POST['fechafin']);
+		$solicitud->setMes($_POST['mes']);
+		//seteamos el asistencia
+		if($tipo_rep=='1'){
+			$datos = $solicitud->ListarReporte3(); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='2'){
+			$datos = $solicitud->ListarReporte2($_POST['mes']); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='3'){
+			$datos = $solicitud->ListarReporte(); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='4'){
+			$datos = $solicitud->ListarReporte4($_POST['fechaini'],$_POST['fechafin']); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+	}
+
+	/*============================================================================*/
+	/*### REPORTE COMPLETADAS ####################################################*/
+	/*============================================================================*/
+	if(isset($_POST['reporte2']) && $_POST['reporte2']=="Procesar")//verifica que se alla presionado el botoCn especifico
+	{
+		@$sql="t";
+		@$_SESSION['reportarcat']=null;
+		$tipo_rep = $_POST['tipo_rep'];
+		$fechaini = $_POST['fechaini'];
+		$fechafin = $_POST['fechafin'];
+		$mes = $_POST['mes'];
+
+		$solicitud->setTipo_rep($_POST['tipo_rep']);
+		$solicitud->setFechaini($_POST['fechaini']);
+		$solicitud->setFechafin($_POST['fechafin']);
+		$solicitud->setMes($_POST['mes']);
+		//seteamos el asistencia
+		if($tipo_rep=='1'){
+			$datos = $solicitud->ListarReporteC3(); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='2'){
+			$datos = $solicitud->ListarReporteC2($_POST['mes']); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='3'){
+			$datos = $solicitud->ListarReporteC(); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+		if($tipo_rep=='4'){
+			$datos = $solicitud->ListarReporteC4($_POST['fechaini'],$_POST['fechafin']); //Invocamos al método de iniciar
+			if(empty($datos)) //Si el método, retorna un arreglo vacío
+			{
+			}else{
+				@$_SESSION['sql'] = $sql;
+				@$_SESSION['reportarcat'] = $datos;//variable sesion que guarda un arreglo con los campos de la bd
+				header("Location: ../vista/solicitud/sql/");//mostrar el archivo con los datos	
+			}
+		}
+	}
 ?>

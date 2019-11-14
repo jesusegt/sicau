@@ -28,6 +28,46 @@
 					return $this->fecha;
 				}
 
+		// Nombre
+			//setters
+				public function setTipo_rep($tipo_rep){
+					$this->tipo_rep = $tipo_rep;
+				}
+			//getters
+				public function getTipo_rep(){
+					return $this->tipo_rep;
+				}
+
+		// Nombre
+			//setters
+				public function setFechaini($fechaini){
+					$this->fechaini = $fechaini;
+				}
+			//getters
+				public function getFechaini(){
+					return $this->fechaini;
+				}
+
+		// Nombre
+			//setters
+				public function setFechafin($fechafin){
+					$this->fechafin = $fechafin;
+				}
+			//getters
+				public function getFechafin(){
+					return $this->fechafin;
+				}
+
+		// Nombre
+			//setters
+				public function setMes($mes){
+					$this->mes = $mes;
+				}
+			//getters
+				public function getMes(){
+					return $this->mes;
+				}
+
 
 		/* CATALAGO */
 			public function Listar(){
@@ -91,7 +131,7 @@
 
 								if(empty($data)){
 
-									$sql = "SELECT * FROM permiso WHERE id=$idsol AND estatus='a' AND (fecha_inicial<='$this->fecha' AND fecha_final >= '$this->fecha')";//sentencia sql para consultar
+									$sql = "SELECT * FROM sol_per AS sp INNER JOIN permiso AS p ON sp.id_per=p.id WHERE sp.id_sol=$idsol AND (p.fecha_inicial<='$this->fecha' AND p.fecha_final >= '$this->fecha') AND estatus='a'";//sentencia sql para consultar
 									$result = $con->prepare($sql);//preparar la sentencia sql
 					    			$result->execute(); //ejecuta la sentencia sql
 									$data = $result->fetchAll();
@@ -172,6 +212,85 @@
 						}	
 					}
 				}
+			
+
+	/* REPORTE */
+		/* LISTAR TODAS */
+			public function ListarReporte(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$sql = "SELECT a.id AS idact,
+								a.fecha AS fechaact,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM sol_act AS sa INNER JOIN solicitante AS s 
+						ON sa.id_sol=s.id INNER JOIN actividad AS a 
+						ON sa.id_act=a.id ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
 			}
 
+		/* LISTAR MES */
+			public function ListarReporte2($mes){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$year= date('Y');
+				$sql = "SELECT a.id AS idact,
+								a.fecha AS fechaact,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM sol_act AS sa INNER JOIN solicitante AS s 
+						ON sa.id_sol=s.id INNER JOIN actividad AS a 
+						ON sa.id_act=a.id WHERE (a.fecha>='$year-$mes-01' AND a.fecha <= '$year-$mes-31') ORDER BY a.id ASC";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR -15 DÍAS */
+			public function ListarReporte3(){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fechahoy=date('Y-m-d');
+				$fechanew= date('Y-m-d',strtotime($fechahoy.'- 15 days'));
+
+				$sql = "SELECT a.id AS idact,
+								a.fecha AS fechaact,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM sol_act AS sa INNER JOIN solicitante AS s 
+						ON sa.id_sol=s.id INNER JOIN actividad AS a 
+						ON sa.id_act=a.id WHERE (a.fecha>='$fechanew' AND a.fecha <= '$fechahoy') ORDER BY a.id ASC;";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+
+		/* LISTAR PERSONALIZADO */
+			public function ListarReporte4($fechaini,$fechafin){
+				require_once("conexionpdo.php");//se llama al archivo para la conexion
+
+				$fecha_bdi= $fechaini;
+				$fechaini = date('Y-m-d', strtotime($fecha_bdi));
+
+				$fecha_bdf= $fechafin;
+				$fechafin = date('Y-m-d', strtotime($fecha_bdf));
+				
+				$sql = "SELECT a.id AS idact,
+								a.fecha AS fechaact,
+								s.cedula AS cedulasol, 
+								s.nombre AS nombresol,
+								s.apellido AS apellidosol
+						FROM sol_act AS sa INNER JOIN solicitante AS s 
+						ON sa.id_sol=s.id INNER JOIN actividad AS a 
+						ON sa.id_act=a.id WHERE (a.fecha>='$fechaini' AND a.fecha <= '$fechafin') ORDER BY a.id ASC;";//consulto si existe el registro
+				$result = $con->prepare($sql);//preparar la sentencia sql
+				$result->execute();
+				return $result->fetchAll(PDO::FETCH_OBJ);
+			}
+}
 ?>

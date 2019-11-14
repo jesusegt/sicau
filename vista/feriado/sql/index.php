@@ -183,7 +183,7 @@ foreach($datosm as $d){
 
 						<div class='form-group'>
 							<label for='motivo'>Motivo</label>
-							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off'  id='miInput' maxlength='50' onkeypress='return Alfanumerico(event)' onkeyup='mayusculainicial(this)'>
+							<input type='text' class='form-control' name='motivo' placeholder='...' value='<?php echo "$motivo"; ?>' autocomplete='off'  id='miInput' maxlength='50' onkeypress='return soloAlfanumerico(event)' onkeyup='mayusculainicial(this)'>
 						</div>
 						<div class='form-group'>
 							<label for='fecha_inicial'>Fecha inicial</label>
